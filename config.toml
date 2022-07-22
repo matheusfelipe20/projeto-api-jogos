@@ -1,0 +1,8 @@
+[api]
+port = "5000"
+
+[database]
+host = "localhost"
+user = ""
+password = ""
+name = "api_jogos"

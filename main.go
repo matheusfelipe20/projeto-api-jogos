@@ -13,6 +13,6 @@ func main() {
 	fmt.Println("Rodando")
 	r := router.GerarRota()
 
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":5000", r))
 
 }
