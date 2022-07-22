@@ -3,23 +3,23 @@ package rotas
 import (
 	"net/http"
 
-	"github.com/matheusfelipe20/projeto-api-jogos/src/router/models"
+	"github.com/matheusfelipe20/projeto-api-jogos/src/controllers"
 )
 
 var rotasJogos = []Rota{
 	{
 		URI:    "/campeonatos",
 		Metodo: http.MethodGet,
-		Funcao: models.GetCampeonatos,
+		Funcao: controllers.GetCampeonatos,
 	},
 	{
 		URI:    "/jogos",
 		Metodo: http.MethodGet,
-		Funcao: models.GetJogos,
+		Funcao: controllers.GetJogos,
 	},
 	{
 		URI:    "/cpf/{numero}",
 		Metodo: http.MethodGet,
-		Funcao: models.GetCPF,
+		Funcao: controllers.GetCPF,
 	},
 }
