@@ -5,6 +5,8 @@ type Campeonato struct {
 	Titulo string `json:"titulo,omitempty"`
 }
 
+/*
 type Campeonatos struct {
 	Campeonatos []Campeonato `json:"campeonatos"`
 }
+*/
