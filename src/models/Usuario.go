@@ -42,7 +42,8 @@ func (u *Usuario) validateUser(action string) error {
 	if !compareted {
 		return errors.New("o usuario requer ser maior de 18 anos")
 	}
-	if u.Cpf == 0 { // " test"
+  // " " test
+	if u.Cpf == 0 { 
 		return errors.New("requer o número do CPF do usuario")
 	}
 	if u.Nome == "" {
