@@ -17,6 +17,7 @@ func GetCPF(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Cpf inválido!", http.StatusBadRequest)
 		return
 	}
+
 	for _, usuario := range Usuarios {
 		if usuario.Cpf == uint64(cpf) {
 			json.NewEncoder(w).Encode(usuario)
@@ -36,9 +37,17 @@ func GetCPF(w http.ResponseWriter, r *http.Request) {
 
 // GetCampeonatos busca os campeonatos salvo no banco
 func GetCampeonatos(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(w)
-	encoder.Encode(Campeonatos)
+
+	//Validação para verificar se há ou não Campeonatos disponíveis
+	validateVazio := Campeonatos
+	var verificationLen = len(validateVazio)
+	if verificationLen >= 1 {
+		w.Header().Add("Content-Type", "application/json")
+		encoder := json.NewEncoder(w)
+		encoder.Encode(Campeonatos)
+	} else {
+		w.Write([]byte("Sem Campeonatos disponíveis no momento!"))
+	}
 	/*
 		db, erro := db.Conectar()
 		if erro != nil {
