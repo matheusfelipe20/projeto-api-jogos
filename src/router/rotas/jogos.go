@@ -10,7 +10,12 @@ var rotasJogos = []Rota{
 	{
 		URI:    "/campeonatos",
 		Metodo: http.MethodGet,
-		Funcao: controllers.GetCampeonatos,
+		Funcao: controllers.ListarCampeonatos,
+	},
+	{
+		URI:    "/campeonatos",
+		Metodo: http.MethodPost,
+		Funcao: controllers.CadastrarCampeonato,
 	},
 	{
 		URI:    "/jogos",
@@ -22,9 +27,9 @@ var rotasJogos = []Rota{
 		Metodo: http.MethodPost,
 		Funcao: controllers.CadastrarJogo,
 	},
-	{
+	/* {
 		URI:    "/cpf/{numero}",
 		Metodo: http.MethodGet,
 		Funcao: controllers.GetCPF,
-	},
+	}, */
 }
