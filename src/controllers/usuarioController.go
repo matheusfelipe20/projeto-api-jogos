@@ -12,33 +12,38 @@ import (
 	"github.com/matheusfelipe20/projeto-api-jogos/src/db"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/models"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/repositories"
+	"github.com/matheusfelipe20/projeto-api-jogos/src/respostas"
 )
 
 func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusUnprocessableEntity, err)
+		return
 	}
 
 	var usr models.Usuario
 	if err := json.Unmarshal(requestBody, &usr); err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusBadRequest, err)
+		return
 	}
 
 	db, err := db.Conectar()
 	if err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
 	}
 	defer db.Close()
 
 	repositorio := repositories.NovoRepositorioDeUsuarios(db)
-	lastID, err := repositorio.AdicionarUsuario(usr)
+	usr.ID, err = repositorio.AdicionarUsuario(usr)
 	if err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte(fmt.Sprintf("Usuário criado com sucesso. ID: %d", lastID)))
+	respostas.JSON(w, http.StatusCreated, usr)
+	w.Write([]byte(fmt.Sprintf("Usuário criado com sucesso. ID: %d", usr.ID)))
 }
 
 func ListarUsuario(w http.ResponseWriter, r *http.Request) {
