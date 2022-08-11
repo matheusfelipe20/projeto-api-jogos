@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -15,19 +14,22 @@ import (
 	"github.com/matheusfelipe20/projeto-api-jogos/src/respostas"
 )
 
+// CadastrarUsuario irá cadastrar um usuário no banco de dados
 func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
+	// Ler o corpo da requisição
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		respostas.Erro(w, http.StatusUnprocessableEntity, err)
 		return
 	}
 
+	// Converter o corpo da requisição para um objeto
 	var usr models.Usuario
 	if err := json.Unmarshal(requestBody, &usr); err != nil {
 		respostas.Erro(w, http.StatusBadRequest, err)
 		return
 	}
-
+	// Abre a conexão com o banco de dados
 	db, err := db.Conectar()
 	if err != nil {
 		respostas.Erro(w, http.StatusInternalServerError, err)
@@ -35,6 +37,7 @@ func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
+	// Insere o jogo no banco de dados
 	repositorio := repositories.NovoRepositorioDeUsuarios(db)
 	usr.ID, err = repositorio.AdicionarUsuario(usr)
 	if err != nil {
@@ -46,24 +49,30 @@ func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprintf("Usuário criado com sucesso. ID: %d", usr.ID)))
 }
 
+// ListarUsuario irá buscar um usuário através do CPF no banco de dados
 func ListarUsuario(w http.ResponseWriter, r *http.Request) {
-	parametro := mux.Vars(r)
-	usuarioCPF, err := strconv.Atoi(parametro["cpf"])
+	parametros := mux.Vars(r)
+	usuarioCPF, err := strconv.Atoi(parametros["cpf"])
 	if err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusBadRequest, err)
+		return
 	}
 
+	// Abre a conexão com o banco de dados
 	db, err := db.Conectar()
 	if err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
 	}
 	defer db.Close()
 
+	// Acessa o repositorio de jogos para fazer a busca
 	repositorio := repositories.NovoRepositorioDeUsuarios(db)
 	usr, err := repositorio.BuscarUsuarioByCpf(usuarioCPF)
 	if err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
 	}
-	log.Println(usr)
+	respostas.JSON(w, http.StatusOK, usr)
 
 }
