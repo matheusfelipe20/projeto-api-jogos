@@ -7,6 +7,7 @@ import (
 )
 
 type Usuario struct {
+	ID         uint64 `json:"id,omitempty"`
 	Cpf        uint64 `json:"cpf,omitempty"`
 	Nome       string `json:"nome,omitempty"`
 	Nascimento string `json:"nascimento,omitempty"`

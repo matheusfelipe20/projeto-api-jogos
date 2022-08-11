@@ -27,9 +27,14 @@ var rotasJogos = []Rota{
 		Metodo: http.MethodPost,
 		Funcao: controllers.CadastrarJogo,
 	},
-	/* {
-		URI:    "/cpf/{numero}",
+	{
+		URI:    "/usuarios",
+		Metodo: http.MethodPost,
+		Funcao: controllers.CadastrarUsuario,
+	},
+	{
+		URI:    "/usuarios/{cpf}",
 		Metodo: http.MethodGet,
-		Funcao: controllers.GetCPF,
-	}, */
+		Funcao: controllers.ListarUsuario,
+	},
 }
