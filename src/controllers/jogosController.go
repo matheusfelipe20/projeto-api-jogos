@@ -2,66 +2,70 @@ package controllers
 
 import (
 	"encoding/json"
-	"io/ioutil"
-	"log"
-	"net/http"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 
 	"github.com/matheusfelipe20/projeto-api-jogos/src/db"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/models"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/repositories"
+	"github.com/matheusfelipe20/projeto-api-jogos/src/respostas"
 )
 
 // CadastrarJogo é a função que irá cadastrar um jogo
-func CadastrarJogo(w http.ResponseWriter, r *http.Request){
-	// ler o corpo da requisição
+func CadastrarJogo(w http.ResponseWriter, r *http.Request) {
+	// Ler o corpo da requisição
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusUnprocessableEntity, err)
+		return
 	}
 
-	// converter o corpo da requisição para um objeto
+	// Converter o corpo da requisição para um objeto
 	var jg models.Jogo
 	if err := json.Unmarshal(requestBody, &jg); err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusBadRequest, err)
+		return
 	}
 
-	// abre a conexão com o banco de dados
+	// Abre a conexão com o banco de dados
 	db, err := db.Conectar()
 	if err != nil {
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
 	}
 	defer db.Close()
 
-	// insere o jogo no banco de dados
+	// Insere o jogo no banco de dados
 	repositorio := repositories.NovoRepositorioDeJogos(db)
-	lastId, err := repositorio.Criar(jg)
+	jg.ID, err = repositorio.Criar(jg)
 	if err != nil {
-		log.Printf("Erro ao fazer o insert no banco de dados: %v, id: %d", err, lastId)
-		log.Fatal(err)
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte(fmt.Sprintf("Jogo criado com sucesso. ID: %d", lastId)))
+	respostas.JSON(w, http.StatusCreated, jg)
+	w.Write([]byte(fmt.Sprintf("Jogo criado com sucesso. ID: %d", jg.ID)))
 }
 
 // ListarJogos é a função que irá listar os jogos
 func ListarJogos(w http.ResponseWriter, r *http.Request) {
 
-	// abrindo conexão com o banco de dados
+	// Abrindo conexão com o banco de dados
 	db, err := db.Conectar()
 	if err != nil {
-		log.Fatalf("Erro ao abrir conexão com o banco de dados: %v", err)
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
 	}
 	defer db.Close()
 
-	// acessa o repositorio de jogos para fazer a busca
+	// Acessa o repositorio de jogos para fazer a busca
 	repositorio := repositories.NovoRepositorioDeJogos(db)
 	jogos, err := repositorio.BuscarJogos()
 	if err != nil {
-		log.Fatalf("Erro ao buscar jogos: %v", err)
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
 	}
+	respostas.JSON(w, http.StatusOK, jogos)
 
-	log.Println(jogos)
-	
 }
