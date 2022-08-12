@@ -5,19 +5,34 @@ import (
 	"strings"
 )
 
-// função para verificar se um cpf é válido
-func VerificarCPF(cpf string) (bool, int) {
+// VerificaCPF irá verificar se o cpf é válido
+func VerificarCPF(cpf int) bool{
+	cpfString := strconv.Itoa(cpf)
+
+	if !Tamanho(cpfString) || VerificarNumerosIguais(cpfString) {
+		return false
+	} else if VerificacaoPorDigito(Numbers(cpfString)) {
+		return true
+	} else {
+		return false
+	}
+
+}
+
+// função para verificar se um cpf do tipo string é válido
+func VerificarCPFbyString(cpf string) (bool, int) {
 
 	var cpfGerado int
-	cpfGerado, _ = strconv.Atoi(Formated(cpf)) 
+	cpfGerado, _ = strconv.Atoi(Formated(cpf))
 
-	if !Tamanho(cpf) || VerificarNumerosIguais(cpf) { 
+	if !Tamanho(cpf) || VerificarNumerosIguais(cpf) {
 		return false, 0
 	} else if VerificacaoPorDigito(Numbers(cpf)) {
 		return true, cpfGerado
 	} else {
 		return false, 0
 	}
+
 }
 
 // função para verificar o tamanho de um cpf

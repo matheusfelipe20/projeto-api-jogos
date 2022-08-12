@@ -1,9 +1,9 @@
-CREATE TABLE IF NOT EXISTS jogos(
-    id int primary key not null,
-    titulo varchar(50) not null,
-    id_campeonato int not null,
-    data date not null
-);
+create table jogos(
+	id serial primary key,
+	titulo varchar(100) not null,
+	id_campeonato bigint not null,
+	data varchar(100) not null
+)
 
 CREATE TABLE IF NOT EXISTS campeonatos(
     id int primary key not null,

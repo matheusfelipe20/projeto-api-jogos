@@ -9,7 +9,7 @@ import (
 type Jogo struct {
 	ID             uint64 `json:"id,omitempty"`
 	Titulo         string `json:"titulo,omitempty"`
-	ID_Campeonatos uint64 `json:"campeonatos,omitempty"`
+	ID_Campeonatos uint64 `json:"id_campeonato,omitempty"`
 	Data           string `json:"data,omitempty"`
 }
 
