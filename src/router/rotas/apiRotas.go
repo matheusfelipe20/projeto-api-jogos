@@ -28,6 +28,16 @@ var rotasJogos = []Rota{
 		Funcao: controllers.CadastrarJogo,
 	},
 	{
+		URI:    "/jogos/{id}",	
+		Metodo: http.MethodGet,
+		Funcao: controllers.ListarUsuario,		// fazer mudanças aqui
+	},	
+	{
+		URI:    "/jogos/{data}",
+		Metodo: http.MethodGet,
+		Funcao: controllers.ListarUsuario,		// fazer mudanças aqui
+	},
+	{
 		URI:    "/usuarios",
 		Metodo: http.MethodPost,
 		Funcao: controllers.CadastrarUsuario,
