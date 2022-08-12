@@ -3,7 +3,7 @@ create table jogos(
 	titulo varchar(100) not null,
 	id_campeonato bigint not null,
 	data varchar(100) not null
-)
+);
 
 CREATE TABLE IF NOT EXISTS campeonatos(
     id int primary key not null,

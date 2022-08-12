@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 
+	"github.com/gorilla/mux"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/db"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/models"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/repositories"
@@ -68,4 +70,31 @@ func ListarJogos(w http.ResponseWriter, r *http.Request) {
 	}
 	respostas.JSON(w, http.StatusOK, jogos)
 
+}
+
+// ListarJogosByID irá buscar um jogo através do ID no banco de dados
+func ListarJogosByID(w http.ResponseWriter, r *http.Request) {
+	parametros := mux.Vars(r)
+	jogoID, err := strconv.Atoi(parametros["id"])
+	if err != nil {
+		respostas.Erro(w, http.StatusBadRequest, err)
+		return
+	}
+
+	// Abre a conexão com o banco de dados
+	db, err := db.Conectar()
+	if err != nil {
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
+	}
+	defer db.Close()
+
+	// Acessa o repositorio de jogos para fazer a busca
+	repositorio := repositories.NovoRepositorioDeJogos(db)
+	jgID, err := repositorio.BuscarJogosByID(jogoID)
+	if err != nil {
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
+	}
+	respostas.JSON(w, http.StatusOK, jgID)
 }
