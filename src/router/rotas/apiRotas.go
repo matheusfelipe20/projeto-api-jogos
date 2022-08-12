@@ -33,9 +33,9 @@ var rotasJogos = []Rota{
 		Funcao: controllers.ListarJogosByID,
 	},
 	{
-		URI:    "/jogos/{data}",
+		URI:    "/jogos/datas/{data}",
 		Metodo: http.MethodGet,
-		Funcao: controllers.ListarUsuario, // fazer mudanças aqui
+		Funcao: controllers.ListarJogosByData, 
 	},
 	{
 		URI:    "/usuarios",

@@ -91,10 +91,34 @@ func ListarJogosByID(w http.ResponseWriter, r *http.Request) {
 
 	// Acessa o repositorio de jogos para fazer a busca
 	repositorio := repositories.NovoRepositorioDeJogos(db)
-	jgID, err := repositorio.BuscarJogosByID(jogoID)
+	jgID, err := repositorio.BuscarJogoByID(jogoID)
 	if err != nil {
 		respostas.Erro(w, http.StatusInternalServerError, err)
 		return
 	}
 	respostas.JSON(w, http.StatusOK, jgID)
+}
+
+// ListarJogosByData é a função que irá listar os jogos pela data
+func ListarJogosByData(w http.ResponseWriter, r *http.Request) {
+
+	parametros := mux.Vars(r)
+
+	// Abre a conexão com o banco de dados
+	db, err := db.Conectar()
+	if err != nil {
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
+	}
+	defer db.Close()
+
+	// Acessa o repositorio de jogos para fazer a busca
+	repositorio := repositories.NovoRepositorioDeJogos(db)
+	jg, err := repositorio.BuscarJogosByData(parametros["data"])
+	if err != nil {
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
+	}
+	respostas.JSON(w, http.StatusOK, jg)
+
 }

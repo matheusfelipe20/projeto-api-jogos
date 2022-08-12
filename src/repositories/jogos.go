@@ -57,7 +57,8 @@ func (repositorio jogos) BuscarJogos() ([]models.Jogo, error) {
 	return jgs, nil
 }
 
-func (repositorio jogos) BuscarJogosByID(id int) (models.Jogo, error) {
+// BuscarJogoByID irá buscar um jogo pelo seu ID
+func (repositorio jogos) BuscarJogoByID(id int) (models.Jogo, error) {
 	linhas, err := repositorio.db.Query("select * from jogos where id = $1", id)
 	if err != nil {
 		return models.Jogo{}, err
@@ -73,3 +74,28 @@ func (repositorio jogos) BuscarJogosByID(id int) (models.Jogo, error) {
 	}
 	return jgID, nil
 }
+
+// BuscarJogoByData irá listar todos os jogos que possuirem a data informada
+func (repositorio jogos) BuscarJogosByData(data string) ([]models.Jogo, error){
+
+	linhas, err := repositorio.db.Query("select * from jogos where data = $1", data)
+	if err != nil {
+		return nil, err
+	}
+	defer linhas.Close()
+
+	var jgs []models.Jogo
+
+	for linhas.Next(){
+		var jogo models.Jogo
+
+		if err = linhas.Scan(&jogo.ID, &jogo.Titulo, &jogo.ID_Campeonatos, &jogo.Data); err != nil {
+			return nil, err
+		}
+
+		jgs = append(jgs, jogo)
+	}
+
+	return jgs, nil
+}
+
