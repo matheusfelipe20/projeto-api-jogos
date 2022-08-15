@@ -1,5 +1,5 @@
 create table jogos(
-	id serial primary key,
+	id bigserial primary key,
 	titulo varchar(100) not null,
 	id_campeonato bigint not null,
 	data varchar(100) not null

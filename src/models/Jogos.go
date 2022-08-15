@@ -7,26 +7,12 @@ import (
 )
 
 type Jogo struct {
-	ID             uint64 `json:"id,omitempty"`
-	Titulo         string `json:"titulo,omitempty"`
-	ID_Campeonatos uint64 `json:"id_campeonato,omitempty"`
-	Data           string `json:"data,omitempty"`
-}
-
-type Opcoes struct {
-	Vitoria string `json:"1,omitempty"`
-	Empate  string `json:"x,omitempty"`
-	Derrota string `json:"2,omitempty"`
-}
-
-type Limites struct {
-	Vitoria string `json:"1,omitempty"`
-	Empate  string `json:"x,omitempty"`
-	Derrota string `json:"2,omitempty"`
-}
-
-type Jogos struct {
-	Jogos []Jogo `json:"jogos"`
+	ID            uint64               `json:"id,omitempty"`
+	Titulo        string               `json:"titulo,omitempty"`
+	ID_Campeonato uint64               `json:"id_campeonato,omitempty"`
+	Data          string               `json:"data,omitempty"`
+	Opcoes        []map[string]float64 `json:"opcoes,omitempty"`
+	Limite        []map[string]int     `json:"limite,omitempty"`
 }
 
 func (j *Jogo) validadeVenda(action string) error {
