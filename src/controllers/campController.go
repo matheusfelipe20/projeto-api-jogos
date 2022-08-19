@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -45,7 +44,6 @@ func CadastrarCampeonato(w http.ResponseWriter, r *http.Request) {
 	}
 
 	respostas.JSON(w, http.StatusCreated, camp)
-	w.Write([]byte(fmt.Sprintf("Campeonato criado com sucesso. ID: %d", camp.ID)))
 }
 
 // ListarCampeonatos lista todos os campeonatos

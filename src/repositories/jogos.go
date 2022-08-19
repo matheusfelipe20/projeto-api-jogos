@@ -25,7 +25,7 @@ func (repositorio jogos) Criar(jogo models.Jogo) (uint64, error) {
 	defer statement.Close()
 
 	var id int
-	err = statement.QueryRow(jogo.ID, jogo.Titulo, jogo.ID_Campeonatos, jogo.Data).Scan(&id)
+	err = statement.QueryRow(jogo.ID, jogo.Titulo, jogo.ID_Campeonato, jogo.Data).Scan(&id)
 	if err != nil {
 		return 0, err
 	}
@@ -47,7 +47,7 @@ func (repositorio jogos) BuscarJogos() ([]models.Jogo, error) {
 	for linhas.Next() {
 		var jogo models.Jogo
 
-		if err = linhas.Scan(&jogo.ID, &jogo.Titulo, &jogo.ID_Campeonatos, &jogo.Data); err != nil {
+		if err = linhas.Scan(&jogo.ID, &jogo.Titulo, &jogo.ID_Campeonato, &jogo.Data); err != nil {
 			return nil, err
 		}
 
@@ -68,7 +68,7 @@ func (repositorio jogos) BuscarJogoByID(id int) (models.Jogo, error) {
 	var jgID models.Jogo
 
 	if linhas.Next() {
-		if err := linhas.Scan(&jgID.ID, &jgID.Titulo, &jgID.ID_Campeonatos, &jgID.Data); err != nil {
+		if err := linhas.Scan(&jgID.ID, &jgID.Titulo, &jgID.ID_Campeonato, &jgID.Data); err != nil {
 			return models.Jogo{}, err
 		}
 	}
@@ -76,7 +76,7 @@ func (repositorio jogos) BuscarJogoByID(id int) (models.Jogo, error) {
 }
 
 // BuscarJogoByData irá listar todos os jogos que possuirem a data informada
-func (repositorio jogos) BuscarJogosByData(data string) ([]models.Jogo, error){
+func (repositorio jogos) BuscarJogosByData(data string) ([]models.Jogo, error) {
 
 	linhas, err := repositorio.db.Query("select * from jogos where data = $1", data)
 	if err != nil {
@@ -86,10 +86,10 @@ func (repositorio jogos) BuscarJogosByData(data string) ([]models.Jogo, error){
 
 	var jgs []models.Jogo
 
-	for linhas.Next(){
+	for linhas.Next() {
 		var jogo models.Jogo
 
-		if err = linhas.Scan(&jogo.ID, &jogo.Titulo, &jogo.ID_Campeonatos, &jogo.Data); err != nil {
+		if err = linhas.Scan(&jogo.ID, &jogo.Titulo, &jogo.ID_Campeonato, &jogo.Data); err != nil {
 			return nil, err
 		}
 
@@ -98,4 +98,3 @@ func (repositorio jogos) BuscarJogosByData(data string) ([]models.Jogo, error){
 
 	return jgs, nil
 }
-
