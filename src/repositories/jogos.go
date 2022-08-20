@@ -18,7 +18,7 @@ func NovoRepositorioDeJogos(db *sql.DB) *jogos {
 // Criar irá inserir um novo jogo no banco de dados
 func (repositorio jogos) Criar(jogo models.Jogo) (uint64, error) {
 
-	statement, err := repositorio.db.Prepare("insert into jogos (id, titulo, id_campeonato, data) values ($1,$2,$3,$4) RETURNING id")
+	statement, err := repositorio.db.Prepare("insert into jogos (id, titulo, id_campeonato, data_jogo) values ($1,$2,$3,$4) RETURNING id")
 	if err != nil {
 		return 0, err
 	}
@@ -78,7 +78,7 @@ func (repositorio jogos) BuscarJogoByID(id int) (models.Jogo, error) {
 // BuscarJogoByData irá listar todos os jogos que possuirem a data informada
 func (repositorio jogos) BuscarJogosByData(data string) ([]models.Jogo, error) {
 
-	linhas, err := repositorio.db.Query("select * from jogos where data = $1", data)
+	linhas, err := repositorio.db.Query("select * from jogos where data_jogo = $1", data)
 	if err != nil {
 		return nil, err
 	}

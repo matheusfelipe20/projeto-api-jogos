@@ -33,7 +33,7 @@ var rotasJogos = []Rota{
 		Funcao: controllers.ListarJogosByID,
 	},
 	{
-		URI:    "/jogos/datas/{data}",
+		URI:    "/jogos/datas/{data_jogo}",
 		Metodo: http.MethodGet,
 		Funcao: controllers.ListarJogosByData, 
 	},
