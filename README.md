@@ -23,9 +23,9 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ---
 
-## Como consultar:
+## Consultas:
 
-#### Campeonatos
+#### Consultar Campeonatos
 
 - GET `/campeonatos`
 ```json
@@ -45,7 +45,7 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ]
 ```
 
-#### Jogos
+#### Consultar Jogos
 - GET `/jogos`
 ```json
 [
@@ -106,9 +106,38 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ]
 ```
 
+#### Consultar Jogos por ID
+- GET `/jogos/10`
+- Jogos disponíveis:
+    - `10`, `11`, `12`
+    - `20`, `21`, `22`
+    - `30`, `31`, `32`
+```json
+{
+  "id": 10,
+  "titulo": "Flamengo x Athletico-PR",
+  "id_campeonato": 1,
+  "data_jogo": "01-01-2022"
+}
+```
 
+#### Consultar Jogos por datas
+- GET `/jogos/datas/29-07-2022`
+```json
+null
+```
 
+#### Consultar Usuários por CPF
+- GET `/usuarios/65910255452`
+- CPFs disponíveis:
+    - _
+    - _
+    - _
+```json
+null
+```
 
+---
 
 ### Como executar o teste do projeto:
 
