@@ -141,4 +141,6 @@ null
 
 ### Como executar o teste do projeto:
 
-- O teste se encontra na pasta: x, nome do arquivo: "y"
+- O teste se encontra na pasta: 'models', nome do arquivo: "Aplicacao_test.go"
+- Diretorio: `projeto-api-jogos/src/models/Aplicacao_test.go`
+
