@@ -114,7 +114,7 @@ func ListarJogosByData(w http.ResponseWriter, r *http.Request) {
 
 	// Acessa o repositorio de jogos para fazer a busca
 	repositorio := repositories.NovoRepositorioDeJogos(db)
-	jg, err := repositorio.BuscarJogosByData(parametros["data"])
+	jg, err := repositorio.BuscarJogosByData(parametros["data_jogo"])
 	if err != nil {
 		respostas.Erro(w, http.StatusInternalServerError, err)
 		return
