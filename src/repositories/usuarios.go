@@ -18,14 +18,14 @@ func NovoRepositorioDeUsuarios(db *sql.DB) *usuarios {
 
 // AdicionarUsuarios irá adicionar um usuário no banco de dados
 func (repositorio usuarios) AdicionarUsuario(usuario models.Usuario) (uint64, error) {
-	statement, err := repositorio.db.Prepare("insert into usuarios (id, cpf, nome, nascimento) values ($1, $2, $3, $4) RETURNING id")
+	statement, err := repositorio.db.Prepare("insert into usuarios (cpf, nome, nascimento) values ($1, $2, $3) RETURNING id")
 	if err != nil {
 		return 0, err
 	}
 	defer statement.Close()
 
 	var id int
-	err = statement.QueryRow(usuario.ID, usuario.Cpf, usuario.Nome, usuario.Nascimento).Scan(&id)
+	err = statement.QueryRow(usuario.Cpf, usuario.Nome, usuario.Nascimento).Scan(&id)
 	if err != nil {
 		return 0, err
 	}

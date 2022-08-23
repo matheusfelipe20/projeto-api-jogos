@@ -18,14 +18,14 @@ func NovoRepositorioDeCampeonatos(db *sql.DB) *campeonatos {
 // AdicionarCampeonato irá adicionar um novo campeonato no banco de dados
 func (repositorio campeonatos) AdicionarCampeonato(campeonato models.Campeonato) (uint64, error) {
 
-	statement, err := repositorio.db.Prepare("insert into campeonatos (id, titulo) values ($1,$2) RETURNING id")
+	statement, err := repositorio.db.Prepare("insert into campeonatos (titulo) values ($1) RETURNING id")
 	if err != nil {
 		return 0, err
 	}
 	defer statement.Close()
 
 	var id int
-	err = statement.QueryRow(campeonato.ID, campeonato.Titulo).Scan(&id)
+	err = statement.QueryRow(campeonato.Titulo).Scan(&id)
 	if err != nil {
 		return 0, err
 	}
