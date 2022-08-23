@@ -18,14 +18,14 @@ func NovoRepositorioDeJogos(db *sql.DB) *jogos {
 // Criar irá inserir um novo jogo no banco de dados
 func (repositorio jogos) Criar(jogo models.Jogo) (uint64, error) {
 
-	statement, err := repositorio.db.Prepare("insert into jogos (id, titulo, id_campeonato, data_jogo) values ($1,$2,$3,$4) RETURNING id")
+	statement, err := repositorio.db.Prepare("insert into jogos (titulo, id_campeonato, data_jogo) values ($1,$2,$3) RETURNING id")
 	if err != nil {
 		return 0, err
 	}
 	defer statement.Close()
 
 	var id int
-	err = statement.QueryRow(jogo.ID, jogo.Titulo, jogo.ID_Campeonato, jogo.Data).Scan(&id)
+	err = statement.QueryRow(jogo.Titulo, jogo.ID_Campeonato, jogo.Data).Scan(&id)
 	if err != nil {
 		return 0, err
 	}
