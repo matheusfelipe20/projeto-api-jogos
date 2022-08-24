@@ -40,7 +40,17 @@ func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
 
 	//Verificar se o usuario é maior de idade
 	if verificarNascimento := validators.ValidadeDataNascimento(usr.Nascimento); !verificarNascimento {
-		http.Error(w, "Erro!! usuario menor de idade", http.StatusInternalServerError)
+		http.Error(w, "Falha ao cadastrar, usuario menor de idade", http.StatusInternalServerError)
+		return
+	}
+
+	if verficarCPF := validators.ValidadeCPF(int(usr.Cpf)); !verficarCPF {
+		http.Error(w, "Falha ao cadastrar, cpf inválido", http.StatusInternalServerError)
+		return
+	}
+
+	if verficarNome := validators.ValidadeNome(usr.Nome); !verficarNome {
+		http.Error(w, "Falha ao cadastrar, campo nome vazio", http.StatusInternalServerError)
 		return
 	}
 
