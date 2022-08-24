@@ -8,7 +8,7 @@ type Usuario struct {
 }
 
 type Usuarios struct {
-	Usuarios []Usuario `json:"usuarios"`
+	Usuarios []Usuario `json:"usuarios,omitempty"`
 }
 
 // Preparar vai chamar ps métodos para validar e formatar o usuário
