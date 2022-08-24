@@ -12,7 +12,6 @@ import (
 )
 
 //TESTES CAMPEONATO
-
 //Cadastrar Campeonato
 func TestPostCampeonato(t *testing.T) {
 
@@ -245,8 +244,126 @@ func TestPostJogos(t *testing.T) {
 
 }
 
-//Funções para comparar os Json's
+//Testes de usuario
 
+//Cadastrar Usuario (Error menor de idade)
+func TestErroCadastroIdade(t *testing.T) {
+
+	resp, err := http.Post("http://localhost:5000/usuarios", "application/json",
+		bytes.NewBuffer([]byte(`{"cpf":11223344556, "nome":"Matheus", "nascimento": "20-01-2005"}`)))
+	if err != nil {
+		t.Error(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		t.Error(err)
+	}
+	log.Println(string(body))
+	pro := Usuario{}
+	err = json.Unmarshal([]byte(string(body)), &pro)
+	if err != nil {
+		log.Println(err)
+	}
+
+	esperado := []byte(`{"cpf":11223344556, "nome":"Matheus", "nascimento": "20-01-2005"}`)
+	//Aqui será comparado os dois Json e vai retornar um bool na variavel 'eq'
+	eq, err := JSONBytesEqual(body, esperado)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if !eq {
+		t.Errorf("Sem sucesso!! valor recebido: '%s', valor esperado: '%s'", body, esperado)
+	}
+
+	if resp.StatusCode != http.StatusCreated {
+		t.Errorf("Sem sucesso!! %v", string(body))
+	}
+
+}
+
+//Teste para verficar Erro: Cadastro de Usuario com CPF inválido (necessario 11 digitos)
+func TestErroCadastroCPF(t *testing.T) {
+
+	resp, err := http.Post("http://localhost:5000/usuarios", "application/json",
+		bytes.NewBuffer([]byte(`{"cpf":1, "nome":"Matheus", "nascimento": "20-01-2002"}`)))
+	if err != nil {
+		t.Error(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		t.Error(err)
+	}
+	log.Println(string(body))
+	pro := Usuario{}
+	err = json.Unmarshal([]byte(string(body)), &pro)
+	if err != nil {
+		log.Println(err)
+	}
+
+	esperado := []byte(`{"cpf":1, "nome":"Matheus", "nascimento": "20-01-2002"}`)
+	//Aqui será comparado os dois Json e vai retornar um bool na variavel 'eq'
+	eq, err := JSONBytesEqual(body, esperado)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if !eq {
+		t.Errorf("Sem sucesso!! valor recebido: '%s', valor esperado: '%s'", body, esperado)
+	}
+
+	if resp.StatusCode != http.StatusCreated {
+		t.Errorf("Sem sucesso!! %v", string(body))
+	}
+
+}
+
+//Teste para verficar Erro: Campo de nome vazio
+func TestErroCadastroNome(t *testing.T) {
+
+	resp, err := http.Post("http://localhost:5000/usuarios", "application/json",
+		bytes.NewBuffer([]byte(`{"cpf":12312312345, "nome":"", "nascimento": "20-01-2002"}`)))
+	if err != nil {
+		t.Error(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		t.Error(err)
+	}
+	log.Println(string(body))
+	pro := Usuario{}
+	err = json.Unmarshal([]byte(string(body)), &pro)
+	if err != nil {
+		log.Println(err)
+	}
+
+	esperado := []byte(`{"cpf":12312312345, "nome":"", "nascimento": "20-01-2002"}`)
+	//Aqui será comparado os dois Json e vai retornar um bool na variavel 'eq'
+	eq, err := JSONBytesEqual(body, esperado)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if !eq {
+		t.Errorf("Sem sucesso!! valor recebido: '%s', valor esperado: '%s'", body, esperado)
+	}
+
+	if resp.StatusCode != http.StatusCreated {
+		t.Errorf("Sem sucesso!! %v", string(body))
+	}
+
+}
+
+//Funções para comparar os Json's
 // JSONEqual comparando dois Json
 func JSONEqual(a, b io.Reader) (bool, error) {
 	var j, j2 interface{}
