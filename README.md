@@ -135,13 +135,18 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ```
 
 #### Consultar Usuários por CPF
-- GET `/usuarios/65910255452`
+- GET `/usuarios/84280875472`
 - CPFs disponíveis:
-    - _
-    - _
-    - _
+    - 65910255452
+    - 84280875472
+    - 43717395475
 ```json
-null
+{
+  "id": 2,
+  "cpf": 84280875472,
+  "nome": "Chico Amaro Bugalho",
+  "nascimento": "02-02-1997"
+}
 ```
 
 ---
