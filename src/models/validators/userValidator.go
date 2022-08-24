@@ -2,7 +2,6 @@ package validators
 
 import (
 	"log"
-	"strconv"
 	"time"
 )
 
@@ -23,18 +22,9 @@ func ValidadeDataNascimento(nascimento string) bool {
 	return compareted
 }
 
-func ValidadeCPF(cpf int) bool {
-	cpfUser := cpf
-
-	quantityCPF := strconv.Itoa(cpfUser)
-
-	//o cpf será verificado se tem 11 digitos
-	return len(quantityCPF) == 11
-}
-
 func ValidadeNome(nome string) bool {
 	nomeUser := nome
 
-	//o nome será verificado para saaber se é vazio ou não
+	//o nome será verificado para saber se é vazio ou não
 	return nomeUser != ""
 }

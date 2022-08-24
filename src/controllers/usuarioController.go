@@ -10,7 +10,6 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/db"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/models"
-	"github.com/matheusfelipe20/projeto-api-jogos/src/models/validators"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/repositories"
 	"github.com/matheusfelipe20/projeto-api-jogos/src/respostas"
 )
@@ -30,6 +29,11 @@ func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
 		respostas.Erro(w, http.StatusBadRequest, err)
 		return
 	}
+	// Verifica os dados de cadastro do usuário
+	if err = usr.ValidarUsuario(); err != nil {
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
+	}
 	// Abre a conexão com o banco de dados
 	db, err := db.Conectar()
 	if err != nil {
@@ -37,22 +41,6 @@ func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer db.Close()
-
-	//Verificar se o usuario é maior de idade
-	if verificarNascimento := validators.ValidadeDataNascimento(usr.Nascimento); !verificarNascimento {
-		http.Error(w, "Falha ao cadastrar, usuario menor de idade", http.StatusInternalServerError)
-		return
-	}
-
-	if verficarCPF := validators.ValidadeCPF(int(usr.Cpf)); !verficarCPF {
-		http.Error(w, "Falha ao cadastrar, cpf inválido", http.StatusInternalServerError)
-		return
-	}
-
-	if verficarNome := validators.ValidadeNome(usr.Nome); !verficarNome {
-		http.Error(w, "Falha ao cadastrar, campo nome vazio", http.StatusInternalServerError)
-		return
-	}
 
 	repositorio := repositories.NovoRepositorioDeUsuarios(db)
 	usr.ID, err = repositorio.AdicionarUsuario(usr)
