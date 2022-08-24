@@ -107,7 +107,7 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ```
 
 #### Consultar Jogos por ID
-- GET `/jogos/10`
+- GET `/jogos/1`
 - Jogos disponíveis:
     - `1`, `2`, `3`
     - `4`, `5`, `6`
@@ -122,9 +122,16 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ```
 
 #### Consultar Jogos por datas
-- GET `/jogos/datas/29-07-2022`
+- GET `/jogos/datas/29-08-2022`
 ```json
-null
+[
+  {
+    "id": 8,
+    "titulo": "PSG x Manchester City",
+    "id_campeonato": 3,
+    "data_jogo": "29-08-2022"
+  }
+]
 ```
 
 #### Consultar Usuários por CPF
