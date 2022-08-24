@@ -50,55 +50,55 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ```json
 [
   {
-    "id": 10,
+    "id": 1,
     "titulo": "Flamengo x Athletico-PR",
     "id_campeonato": 1,
     "data_jogo": "01-01-2022"
   },
   {
-    "id": 11,
+    "id": 2,
     "titulo": "Palmeiras x Corinthians",
     "id_campeonato": 1,
     "data_jogo": "02-02-2022"
   },
   {
-    "id": 12,
+    "id": 3,
     "titulo": "Internacional x Botafogo",
     "id_campeonato": 1,
     "data_jogo": "03-03-2022"
   },
   {
-    "id": 20,
+    "id": 4,
     "titulo": "Fluminense x River Plate",
     "id_campeonato": 2,
     "data_jogo": "10-04-2022"
   },
   {
-    "id": 21,
+    "id": 5,
     "titulo": "Santos x Banfield",
     "id_campeonato": 2,
     "data_jogo": "11-05-2022"
   },
   {
-    "id": 22,
+    "id": 6,
     "titulo": "Lanús x Melgar",
     "id_campeonato": 2,
     "data_jogo": "12-06-2022"
   },
   {
-    "id": 30,
+    "id": 7,
     "titulo": "Real Madrid x Liverpool",
     "id_campeonato": 3,
     "data_jogo": "29-07-2022"
   },
   {
-    "id": 31,
+    "id": 8,
     "titulo": "PSG x Manchester City",
     "id_campeonato": 3,
     "data_jogo": "29-08-2022"
   },
   {
-    "id": 32,
+    "id": 9,
     "titulo": "Atlético de Madrid x Porto",
     "id_campeonato": 3,
     "data_jogo": "29-09-2022"
@@ -109,12 +109,12 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 #### Consultar Jogos por ID
 - GET `/jogos/10`
 - Jogos disponíveis:
-    - `10`, `11`, `12`
-    - `20`, `21`, `22`
-    - `30`, `31`, `32`
+    - `1`, `2`, `3`
+    - `4`, `5`, `6`
+    - `7`, `8`, `9`
 ```json
 {
-  "id": 10,
+  "id": 1,
   "titulo": "Flamengo x Athletico-PR",
   "id_campeonato": 1,
   "data_jogo": "01-01-2022"
