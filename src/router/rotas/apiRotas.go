@@ -47,4 +47,14 @@ var rotasJogos = []Rota{
 		Metodo: http.MethodGet,
 		Funcao: controllers.ListarUsuario,
 	},
+	{
+		URI:    "/aposta/",
+		Metodo: http.MethodPost,
+		Funcao: controllers.RealizarAposta,
+	},
+	{
+		URI:    "/aposta/{nome}",
+		Metodo: http.MethodGet,
+		Funcao: controllers.ListarApostasByComprador,
+	},
 }

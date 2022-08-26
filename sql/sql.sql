@@ -23,3 +23,16 @@ CREATE TABLE IF NOT EXISTS usuarios(
     nome varchar(100) not null,
     nascimento varchar(50) not null
 );
+
+-- tabela de apostas 
+
+create table aposta(
+	id bigserial primary key not null,
+	id_jogo bigint not null,
+	id_usuario bigint not null,
+	opcao_aposta varchar(11) not null,
+	valor_aposta float not null,
+	foreign key (id_jogo) references jogos(id),
+	foreign key (id_usuario) references usuarios(id),
+    check (opcao_aposta in('casa', 'empate', 'fora'))
+);
