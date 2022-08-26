@@ -13,7 +13,6 @@ type Jogo struct {
 	Data          string               `json:"data_jogo,omitempty"`
 	Opcoes        []map[string]float64 `json:"opcoes,omitempty"`
 	Limite        []map[string]int     `json:"limite,omitempty"`
-}
 
 // Verifica as validações dos campos de cadastro de um jogo
 func (jg *Jogo) ValidarJogo() error {
