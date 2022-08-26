@@ -30,6 +30,12 @@ func CadastrarJogo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Verifica os dados de cadastro do jogo
+	if err = jg.ValidarJogo(); err != nil {
+		respostas.Erro(w, http.StatusInternalServerError, err)
+		return
+	}
+
 	// Abre a conexão com o banco de dados
 	db, err := db.Conectar()
 	if err != nil {
