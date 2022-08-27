@@ -1,4 +1,5 @@
 package controllers
+/* 
 
 import (
 	"encoding/json"
@@ -67,3 +68,4 @@ func ListarCampeonatos(w http.ResponseWriter, r *http.Request) {
 
 	respostas.JSON(w, http.StatusOK, campeonatos)
 }
+ */

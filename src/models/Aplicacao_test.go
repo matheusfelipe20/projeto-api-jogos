@@ -1,4 +1,5 @@
 package models
+/*
 
 import (
 	"bytes"
@@ -389,3 +390,4 @@ func JSONBytesEqual(a, b []byte) (bool, error) {
 	}
 	return reflect.DeepEqual(j2, j), nil
 }
+ */
