@@ -1,4 +1,5 @@
 package controllers
+/*
 
 import (
 	"encoding/json"
@@ -128,3 +129,4 @@ func ListarJogosByData(w http.ResponseWriter, r *http.Request) {
 	respostas.JSON(w, http.StatusOK, jg)
 
 }
+ */

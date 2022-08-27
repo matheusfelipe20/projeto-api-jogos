@@ -1,4 +1,5 @@
 package controllers
+/*
 
 import (
 	"encoding/json"
@@ -70,4 +71,4 @@ func ListarApostasByComprador(w http.ResponseWriter, r *http.Request) {
 	}
 
 	respostas.JSON(w, http.StatusOK, apostas)
-}
+} */

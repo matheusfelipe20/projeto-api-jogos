@@ -1,4 +1,5 @@
 package repositories
+/*
 
 import (
 	"database/sql"
@@ -89,4 +90,4 @@ func (ap *aposta) BuscarApostaByTituloJogo(titulo string) ([]models.Aposta, erro
 	return aps, nil
 }
 
-// BuscarApostaByCampeonato irá buscar uma aposta pelo campeonato
+// BuscarApostaByCampeonato irá buscar uma aposta pelo campeonato */
