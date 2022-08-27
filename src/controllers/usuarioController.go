@@ -1,5 +1,6 @@
 package controllers
-/* 
+
+/*
 
 import (
 	"encoding/json"
@@ -81,4 +82,4 @@ func ListarUsuario(w http.ResponseWriter, r *http.Request) {
 	respostas.JSON(w, http.StatusOK, usr)
 
 }
- */
+*/
