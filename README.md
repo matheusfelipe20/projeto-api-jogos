@@ -15,15 +15,34 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## 💻 Descrição
 
-- O projeto tem como objetivo simular um ambiente de apostas esportivas com o uso de uma api com integração de terceiros, com as opções de cadastrar e realizar consultas. Ele usa [gorilla-mux](https://github.com/gorilla/mux) para criar as rotas.
+- O projeto tem como objetivo simular um ambiente de apostas esportivas com o uso de uma api com integração de terceiros, com as opções de fazer aposta e realizar consultas. Ele usa [gorilla-mux](https://github.com/gorilla/mux) para criar as rotas.
 
-- A funcionalidade desse projeto consiste em cadastrar: `usuarios`, `campeonatos` e `jogos`. 
-- Consultar todos os eventos cadastrados ou filtrar por: `id`, `campeonatos`e `datas`. 
-- E filtrar usuários por: `cpf`.
+- A funcionalidade desse projeto consiste em realizar apostas: `venda`. 
+- Consultar todas as apostas realizadas: `venda` ou filtrar por: `campeonatos`, `jogos` e `cpf`.
 
 ---
 
 ## Consultas:
+
+#### Consultar Apostas
+- GET `/venda`
+```json
+[
+  {
+    "id": 1,
+    "id_jogo": 354858757161272,
+    "titulo_jogo": "São Paulo x Flamengo",
+    "campeonato": "Brasileirão - Serie A",
+    "data_jogo": "2022-08-29",
+    "opcao_aposta": "casa",
+    "valor_aposta": 50,
+    "limite_aposta": 500,
+    "cliente_nome": "Jonas Victor Alves da Silva",
+    "cliente_cpf": "23130011480",
+    "cliente_nascimento": "02-03-2000"
+  }
+]
+```
 
 #### Consultar Campeonatos
 
@@ -31,16 +50,16 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ```json
 [
   {
-    "id": 1,
+    "id": 30,
     "titulo": "Brasileirão - Serie A"
   },
   {
-    "id": 2,
-    "titulo": "Copa Sul-Americana"
+    "id": 35,
+    "titulo": "Copa América - Feminina"
   },
   {
-    "id": 3,
-    "titulo": "Champions League"
+    "id": 36,
+    "titulo": "Uruguai - Primeira Divisão"
   }
 ]
 ```
@@ -106,47 +125,15 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ]
 ```
 
-#### Consultar Jogos por ID
-- GET `/jogos/1`
-- Jogos disponíveis:
-    - `1`, `2`, `3`
-    - `4`, `5`, `6`
-    - `7`, `8`, `9`
-```json
-{
-  "id": 1,
-  "titulo": "Flamengo x Athletico-PR",
-  "id_campeonato": 1,
-  "data_jogo": "01-01-2022"
-}
-```
-
-#### Consultar Jogos por datas
-- GET `/jogos/datas/29-08-2022`
-```json
-[
-  {
-    "id": 8,
-    "titulo": "PSG x Manchester City",
-    "id_campeonato": 3,
-    "data_jogo": "29-08-2022"
-  }
-]
-```
-
 #### Consultar Usuários por CPF
-- GET `/usuarios/84280875472`
+- GET `/usuarios/23130011480`
 - CPFs disponíveis:
     - 65910255452
     - 84280875472
     - 43717395475
+    - 23130011480
 ```json
-{
-  "id": 2,
-  "cpf": 84280875472,
-  "nome": "Chico Amaro Bugalho",
-  "nascimento": "02-02-1997"
-}
+null
 ```
 
 ---

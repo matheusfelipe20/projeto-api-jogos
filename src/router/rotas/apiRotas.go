@@ -20,7 +20,7 @@ var rotasJogos = []Rota{
 	{
 		URI:    "/usuarios/{cpf}",
 		Metodo: http.MethodGet,
-		Funcao: func(h http.ResponseWriter, r *http.Request) {},
+		Funcao: controllers.ListarUsuario,
 	},
 	{
 		URI:    "/venda",
