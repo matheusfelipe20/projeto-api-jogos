@@ -31,8 +31,8 @@ func (vd *Vendas) ValidarVendas() error {
 	if verificarCampeonato := validators.ValidarCampo(vd.Campeonato); !verificarCampeonato {
 		return errors.New("falha ao cadastrar, insira o campeonato")
 	}
-	if verificarDataJogo := validators.ValidadeDataVenda(vd.Data_jogo); !verificarDataJogo {
-		return errors.New("falha ao cadastrar, insira a data do jogo")
+	if verificarDataJogo := validators.ValidadeDataVenda(vd.Data_jogo); verificarDataJogo {
+		return errors.New("falha ao cadastrar, insira a data do jogo, ou verfique se o jogo ainda está disponivel")
 	}
 	if verificarNomeCliente := validators.ValidarCampo(vd.Cliente_nome); !verificarNomeCliente {
 		return errors.New("falha ao cadastrar, insira o nome do cliente")

@@ -12,7 +12,7 @@ func ValidadeDataVenda(data string) bool {
 		return false
 	}
 
-	parsed, err := time.Parse("02/01/2006", data)
+	parsed, err := time.Parse("2006-01-02", data)
 	if err != nil {
 		log.Println(err)
 	}
