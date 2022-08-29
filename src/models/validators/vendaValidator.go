@@ -5,14 +5,19 @@ import (
 	"time"
 )
 
+
 //Validador para limitar a venda do jogo a 1 dia antes do evento
-func ValidadeVenda(data string) bool {
+func ValidadeDataVenda(data string) bool {
 
-	dataJogo := data
 
-	parsed, err := time.Parse("02-01-2006", dataJogo)
+	if data != "" {
+		return false
+	}
+
+	parsed, err := time.Parse("02-01-2006", data)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return false
 	}
 	beforeDay := parsed.AddDate(0, 0, 1) //Somar 1 dia a data do evento
 	today := time.Now()
@@ -21,3 +26,4 @@ func ValidadeVenda(data string) bool {
 
 	return comparetedEvento
 }
+
