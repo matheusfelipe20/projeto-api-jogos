@@ -14,7 +14,7 @@ type Vendas struct {
 	Data_jogo          string  `json:"data_jogo,omitempty"`
 	Opcao_aposta       string  `json:"opcao_aposta,omitempty"`
 	Valor_aposta       float64 `json:"valor_aposta,omitempty"`
-	Limite_aposta      int     `json:"limite_aposta,omitempty"`	//validar limite de aposta 
+	Limite_aposta      int     `json:"limite_aposta,omitempty"` //validar limite de aposta
 	Cliente_nome       string  `json:"cliente_nome,omitempty"`
 	Cliente_cpf        string  `json:"cliente_cpf,omitempty"`
 	Cliente_nascimento string  `json:"cliente_nascimento,omitempty"`
@@ -28,21 +28,21 @@ func (vd *Vendas) ValidarVendas() error {
 	if verificarTituloJogo := validators.ValidarCampo(vd.Titulo_jogo); !verificarTituloJogo {
 		return errors.New("falha ao  cadastrar, insira o titulo do jogo")
 	}
-	if verificarCampeonato := validators.ValidarCampo(vd.Campeonato); !verificarCampeonato{
+	if verificarCampeonato := validators.ValidarCampo(vd.Campeonato); !verificarCampeonato {
 		return errors.New("falha ao cadastrar, insira o campeonato")
 	}
-	/* if verificarDataJogo := validators.ValidadeDataVenda(vd.Data_jogo); !verificarDataJogo {
+	if verificarDataJogo := validators.ValidadeDataVenda(vd.Data_jogo); verificarDataJogo {
 		return errors.New("falha ao cadastrar, insira a data do jogo")
-	} */
+	}
 	if verificarNomeCliente := validators.ValidarCampo(vd.Cliente_nome); !verificarNomeCliente {
 		return errors.New("falha ao cadastrar, insira o nome do cliente")
 	}
 	if verificarCpfCliente, _ := validators.VerificarCPFbyString(vd.Cliente_cpf); !verificarCpfCliente {
 		return errors.New("falha ao cadastrar, cpf inválido")
 	}
-	/* if verificarNomeCliente := validators.ValidadeDataNascimento(vd.Cliente_nascimento); !verificarNomeCliente {
+	if verificarNomeCliente := validators.ValidadeDataNascimento(vd.Cliente_nascimento); !verificarNomeCliente {
 		return errors.New("falha ao cadastrar, usuário menor de idade")
-	} */
+	}
 
 	return nil
 }

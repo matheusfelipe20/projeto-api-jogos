@@ -30,7 +30,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID:            354858757161272,
 		Titulo:        "São Paulo x Flamengo",
 		ID_Campeonato: 30,
-		Data:          "2022-08-29",
+		Data:          "2022-08-31",
 	},
 	{
 		ID:            354858757161273,
