@@ -23,16 +23,16 @@ import (
 
 var Campeonatos []models.Campeonato = []models.Campeonato{
 	{
-		ID:     1,
+		ID:     30,
 		Titulo: "Brasileirão - Serie A",
 	},
 	{
-		ID:     2,
-		Titulo: "Copa Sul-Americana",
+		ID:     35,
+		Titulo: "Copa América - Feminina",
 	},
 	{
-		ID:     3,
-		Titulo: "Champions League",
+		ID:     36,
+		Titulo: "Uruguai - Primeira Divisão",
 	},
 }
 

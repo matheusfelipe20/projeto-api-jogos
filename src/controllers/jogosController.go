@@ -25,61 +25,62 @@ import (
 */
 
 var Jogos []models.Jogo = []models.Jogo{
+	// Brasileirão - Serie A
 	{
-		ID:            10,
-		Titulo:        "Flamengo x Athletico-PR",
-		ID_Campeonato: 1,
-		Data:          "01-01-2022",
+		ID:            354858757161272,
+		Titulo:        "São Paulo x Flamengo",
+		ID_Campeonato: 30,
+		Data:          "2022-08-29",
 	},
 	{
-		ID:            11,
-		Titulo:        "Palmeiras x Corinthians",
-		ID_Campeonato: 1,
-		Data:          "02-02-2022",
+		ID:            354858757161273,
+		Titulo:        "Fluminense x Palmeiras",
+		ID_Campeonato: 30,
+		Data:          "2022-07-18",
 	},
 	{
-		ID:            12,
-		Titulo:        "Internacional x Botafogo",
-		ID_Campeonato: 1,
-		Data:          "03-03-2022",
-	},
-
-	{
-		ID:            20,
-		Titulo:        "Fluminense x River Plate",
-		ID_Campeonato: 2,
-		Data:          "10-04-2022",
+		ID:            354858757161274,
+		Titulo:        "Botafogo x Santos",
+		ID_Campeonato: 30,
+		Data:          "2022-07-15",
 	},
 	{
-		ID:            21,
-		Titulo:        "Santos x Banfield",
-		ID_Campeonato: 2,
-		Data:          "11-05-2022",
+		ID:            354858757161275,
+		Titulo:        "Vasco x Atlético",
+		ID_Campeonato: 30,
+		Data:          "2022-07-16",
 	},
 	{
-		ID:            22,
-		Titulo:        "Lanús x Melgar",
-		ID_Campeonato: 2,
-		Data:          "12-06-2022",
+		ID:            354858757161276,
+		Titulo:        "Ceará x Avaí",
+		ID_Campeonato: 30,
+		Data:          "2022-07-22",
 	},
-
+	// Copa América - Feminina
 	{
-		ID:            30,
-		Titulo:        "Real Madrid x Liverpool",
-		ID_Campeonato: 3,
-		Data:          "29-07-2022",
-	},
-	{
-		ID:            31,
-		Titulo:        "PSG x Manchester City",
-		ID_Campeonato: 3,
-		Data:          "29-08-2022",
+		ID:            354858324654689,
+		Titulo:        "Colômbia x Chile",
+		ID_Campeonato: 35,
+		Data:          "2022-07-22",
 	},
 	{
-		ID:            32,
-		Titulo:        "Atlético de Madrid x Porto",
-		ID_Campeonato: 3,
-		Data:          "29-09-2022",
+		ID:            354858324654690,
+		Titulo:        "Equador x Paraguai",
+		ID_Campeonato: 35,
+		Data:          "2022-07-15",
+	},
+	// Uruguai - Primeira Divisão
+	{
+		ID:            65489162165498,
+		Titulo:        "Liverpool FC x AlbionFC",
+		ID_Campeonato: 36,
+		Data:          "2022-07-15",
+	},
+	{
+		ID:            65489162165499,
+		Titulo:        "Deportivo Maldonado x Torque da Cidade de Montevideu",
+		ID_Campeonato: 36,
+		Data:          "2022-07-18",
 	},
 }
 
