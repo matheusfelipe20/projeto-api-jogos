@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/matheusfelipe20/projeto-api-jogos/src/controllers"
-	// "github.com/matheusfelipe20/projeto-api-jogos/src/controllers"
 )
 
 var rotasJogos = []Rota{
@@ -24,8 +23,13 @@ var rotasJogos = []Rota{
 		Funcao: func(h http.ResponseWriter, r *http.Request) {},
 	},
 	{
-		URI:    "/venda/",
+		URI:    "/venda",
 		Metodo: http.MethodPost,
-		Funcao: func(h http.ResponseWriter, r *http.Request) {},
+		Funcao: controllers.RealizarVenda,
+	},
+	{
+		URI:    "/venda",
+		Metodo: http.MethodGet,
+		Funcao: controllers.ListarVendas,
 	},
 }
