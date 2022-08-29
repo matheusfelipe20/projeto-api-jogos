@@ -1,8 +1,8 @@
 -- tabela de apostas 
 
-create table venda(
+create table if not exists venda(
 	id bigserial primary key not null,
-	id_jogo bigint unique not null,
+	id_jogo bigint not null,
     titulo_jogo varchar(50) not null,
 	campeonato varchar(100) not null,
     data_jogo varchar(50) not null,
@@ -10,7 +10,7 @@ create table venda(
 	valor_aposta float not null,
     limite_aposta bigint not null,
     cliente_nome varchar(100) not null,
-    cliente_cpf varchar(50) unique not null,
+    cliente_cpf varchar(50) not null,
     cliente_nascimento varchar(50) not null,
     check (opcao_aposta in('casa', 'empate', 'fora'))
 );
