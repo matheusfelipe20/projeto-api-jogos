@@ -8,7 +8,7 @@ create table if not exists venda(
     data_jogo varchar(50) not null,
 	opcao_aposta varchar(11) not null,
 	valor_aposta float not null,
-    limite_aposta bigint not null,
+    limite_aposta float not null,
     cliente_nome varchar(100) not null,
     cliente_cpf varchar(50) not null,
     cliente_nascimento varchar(50) not null,

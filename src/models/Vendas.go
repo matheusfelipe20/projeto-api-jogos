@@ -14,7 +14,7 @@ type Vendas struct {
 	Data_jogo          string  `json:"data_jogo,omitempty"`
 	Opcao_aposta       string  `json:"opcao_aposta,omitempty"`
 	Valor_aposta       float64 `json:"valor_aposta,omitempty"`
-	Limite_aposta      int     `json:"limite_aposta,omitempty"` //validar limite de aposta
+	Limite_aposta      float64 `json:"limite_aposta,omitempty"` //validar limite de aposta
 	Cliente_nome       string  `json:"cliente_nome,omitempty"`
 	Cliente_cpf        string  `json:"cliente_cpf,omitempty"`
 	Cliente_nascimento string  `json:"cliente_nascimento,omitempty"`
@@ -42,6 +42,9 @@ func (vd *Vendas) ValidarVendas() error {
 	}
 	if verificarNomeCliente := validators.ValidadeDataNascimento(vd.Cliente_nascimento); !verificarNomeCliente {
 		return errors.New("falha ao cadastrar, usuário menor de idade")
+	}
+	if verificarLimiteAposta := validators.ValidadeLimiteValor(vd.Limite_aposta, vd.Valor_aposta); !verificarLimiteAposta {
+		return errors.New("falha ao cadastrar, valor da aposta insuficiente, ou excedeu o limite do valor da aposta")
 	}
 
 	return nil

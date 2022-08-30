@@ -23,3 +23,9 @@ func ValidadeDataVenda(data string) bool {
 
 	return comparetedEvento
 }
+
+func ValidadeLimiteValor(limite_aposta float64, valor_aposta float64) bool {
+
+	return limite_aposta >= valor_aposta
+
+}

@@ -225,6 +225,43 @@ func TestCriarVendaErro_DataNascimento(t *testing.T) {
 	}
 }
 
+//Criar bilhete de aposta (Erro limite do valor da aposta excedido)
+func TestCriarVendaErro_LimiteExcedido(t *testing.T) {
+	resp, err := http.Post("http://localhost:5000/venda", "application/json",
+		bytes.NewBuffer([]byte(`{
+			"id_jogo": 354858757161272,
+			"titulo_jogo": "São Paulo x Flamengo",
+ 			"campeonato": "Brasileirão - Serie A",
+  			"data_jogo": "2022-08-31",
+  			"opcao_aposta": "empate",
+			"valor_aposta": 500,
+			"limite_aposta": 100,
+			"cliente_nome": "Valdir",
+			"cliente_cpf": "231.300.114-80",
+			"cliente_nascimento": "15/02/2000"
+    	}`)))
+	if err != nil {
+		t.Error(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		t.Error(err)
+	}
+	log.Println(string(body))
+	pro := Vendas{}
+	err = json.Unmarshal([]byte(string(body)), &pro)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if resp.StatusCode != http.StatusCreated {
+		t.Errorf("Sem sucesso!! %v", string(body))
+	}
+}
+
 //Criar bilhete de aposta (Erro Nome do cliente vazio)
 func TestCriarVendaErro_NomeCliente(t *testing.T) {
 
