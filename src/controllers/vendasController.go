@@ -12,7 +12,7 @@ import (
 )
 
 // RealizarVenda irá registrar uma venda no banco de dados
-func RealizarVenda(w http.ResponseWriter, r *http.Request){
+func RealizarVenda(w http.ResponseWriter, r *http.Request) {
 
 	// Lendo o corpo da requisição
 	requestBody, err := ioutil.ReadAll(r.Body)
@@ -57,7 +57,7 @@ func RealizarVenda(w http.ResponseWriter, r *http.Request){
 
 // ListarVendas irá buscar todas as vendas no banco de dados
 func ListarVendas(w http.ResponseWriter, r *http.Request) {
-	
+
 	// Abrindo conexão com o banco de dados
 	db, err := db.Conectar()
 	if err != nil {
