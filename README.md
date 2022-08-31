@@ -19,7 +19,7 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 - A funcionalidade desse projeto consiste em realizar apostas: `venda`. 
 - Consultar todas as apostas realizadas: `venda`.
-- Filtrar por: `campeonatos`, `jogos`.
+- Filtrar por: `campeonatos` e `jogos`.
 - Filtrar usuários por: `cpf`.
 
 ---
