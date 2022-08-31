@@ -15,11 +15,11 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## 💻 Descrição
 
-- O projeto tem como objetivo simular um ambiente de apostas esportivas com o uso de uma api com integração de terceiros, com as opções de fazer aposta e realizar consultas. Ele usa [gorilla-mux](https://github.com/gorilla/mux) para criar as rotas.
+- O projeto tem como objetivo simular um ambiente de apostas esportivas com o uso de uma api com integração de terceiros, com as opções de fazer aposta e realizar consultas. Ele usa [gorilla-mux](https://github.com/gorilla/mux) para criar as rotas;
 
-- A funcionalidade desse projeto consiste em realizar apostas: `venda`. 
-- Consultar todas as apostas realizadas: `venda`.
-- Filtrar por: `campeonatos` e `jogos`.
+- A funcionalidade desse projeto consiste em realizar apostas: `venda`;
+- Consultar todas as apostas realizadas: `venda`;
+- Filtrar por: `campeonatos` e `jogos`;
 - Filtrar usuários por: `cpf`.
 
 ---
