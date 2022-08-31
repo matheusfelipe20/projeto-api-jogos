@@ -24,7 +24,7 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ---
 
-## Consultas:
+## Consultas
 
 #### Consultar Apostas
 - GET `/venda`
