@@ -18,7 +18,9 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 - O projeto tem como objetivo simular um ambiente de apostas esportivas com o uso de uma api com integração de terceiros, com as opções de fazer aposta e realizar consultas. Ele usa [gorilla-mux](https://github.com/gorilla/mux) para criar as rotas.
 
 - A funcionalidade desse projeto consiste em realizar apostas: `venda`. 
-- Consultar todas as apostas realizadas: `venda` ou filtrar por: `campeonatos`, `jogos` e `cpf`.
+- Consultar todas as apostas realizadas: `venda`.
+- Filtrar por: `campeonatos`, `jogos`.
+- Filtrar usuários por: `cpf`.
 
 ---
 
@@ -26,6 +28,7 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 #### Consultar Apostas
 - GET `/venda`
+- Output
 ```json
 [
   {
@@ -47,6 +50,7 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 #### Consultar Campeonatos
 
 - GET `/campeonatos`
+- Output
 ```json
 [
   {
@@ -66,6 +70,7 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 #### Consultar Jogos
 - GET `/jogos`
+- Output
 ```json
 [
   {
@@ -126,12 +131,13 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ```
 
 #### Consultar Usuários por CPF
-- GET `/usuarios/23130011480`
+- GET `/usuarios/65910255452`
 - CPFs disponíveis:
     - 65910255452
     - 84280875472
     - 43717395475
     - 23130011480
+- Output
 ```json
 null
 ```
