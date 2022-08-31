@@ -74,58 +74,58 @@ Esse projeto foi desenvolvido utilizando as seguintes tecnologias:
 ```json
 [
   {
-    "id": 1,
-    "titulo": "Flamengo x Athletico-PR",
-    "id_campeonato": 1,
-    "data_jogo": "01-01-2022"
+    "id": 354858757161272,
+    "titulo": "São Paulo x Flamengo",
+    "id_campeonato": 30,
+    "data_jogo": "2022-08-31"
   },
   {
-    "id": 2,
-    "titulo": "Palmeiras x Corinthians",
-    "id_campeonato": 1,
-    "data_jogo": "02-02-2022"
+    "id": 354858757161273,
+    "titulo": "Fluminense x Palmeiras",
+    "id_campeonato": 30,
+    "data_jogo": "2022-07-18"
   },
   {
-    "id": 3,
-    "titulo": "Internacional x Botafogo",
-    "id_campeonato": 1,
-    "data_jogo": "03-03-2022"
+    "id": 354858757161274,
+    "titulo": "Botafogo x Santos",
+    "id_campeonato": 30,
+    "data_jogo": "2022-07-15"
   },
   {
-    "id": 4,
-    "titulo": "Fluminense x River Plate",
-    "id_campeonato": 2,
-    "data_jogo": "10-04-2022"
+    "id": 354858757161275,
+    "titulo": "Vasco x Atlético",
+    "id_campeonato": 30,
+    "data_jogo": "2022-07-16"
   },
   {
-    "id": 5,
-    "titulo": "Santos x Banfield",
-    "id_campeonato": 2,
-    "data_jogo": "11-05-2022"
+    "id": 354858757161276,
+    "titulo": "Ceará x Avaí",
+    "id_campeonato": 30,
+    "data_jogo": "2022-07-22"
   },
   {
-    "id": 6,
-    "titulo": "Lanús x Melgar",
-    "id_campeonato": 2,
-    "data_jogo": "12-06-2022"
+    "id": 354858324654689,
+    "titulo": "Colômbia x Chile",
+    "id_campeonato": 35,
+    "data_jogo": "2022-07-22"
   },
   {
-    "id": 7,
-    "titulo": "Real Madrid x Liverpool",
-    "id_campeonato": 3,
-    "data_jogo": "29-07-2022"
+    "id": 354858324654690,
+    "titulo": "Equador x Paraguai",
+    "id_campeonato": 35,
+    "data_jogo": "2022-07-15"
   },
   {
-    "id": 8,
-    "titulo": "PSG x Manchester City",
-    "id_campeonato": 3,
-    "data_jogo": "29-08-2022"
+    "id": 65489162165498,
+    "titulo": "Liverpool FC x AlbionFC",
+    "id_campeonato": 36,
+    "data_jogo": "2022-07-15"
   },
   {
-    "id": 9,
-    "titulo": "Atlético de Madrid x Porto",
-    "id_campeonato": 3,
-    "data_jogo": "29-09-2022"
+    "id": 65489162165499,
+    "titulo": "Deportivo Maldonado x Torque da Cidade de Montevideu",
+    "id_campeonato": 36,
+    "data_jogo": "2022-07-18"
   }
 ]
 ```
