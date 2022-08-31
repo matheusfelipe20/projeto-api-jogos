@@ -7,23 +7,6 @@ import (
 	"github.com/matheusfelipe20/projeto-api-jogos/src/respostas"
 )
 
-/*
-
-import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"net/http"
-	"strconv"
-
-	"github.com/gorilla/mux"
-	"github.com/matheusfelipe20/projeto-api-jogos/src/db"
-	"github.com/matheusfelipe20/projeto-api-jogos/src/models"
-	"github.com/matheusfelipe20/projeto-api-jogos/src/repositories"
-	"github.com/matheusfelipe20/projeto-api-jogos/src/respostas"
-)
-*/
-
 var Jogos []models.Jogo = []models.Jogo{
 	// Brasileirão - Serie A
 	{

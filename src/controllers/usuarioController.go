@@ -30,7 +30,7 @@ var Usuario []models.Usuario = []models.Usuario{
 	},
 }
 
-// ListarUsuario irá buscar um usuário através do CPF no banco de dados
+// ListarUsuario irá buscar um usuário através do CPF
 func ListarUsuario(w http.ResponseWriter, r *http.Request) {
 
 	respostas.JSON(w, http.StatusOK, Usuario)
