@@ -3,54 +3,156 @@ package models
 import (
 	"bytes"
 	"encoding/json"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/http/httptest"
+	"reflect"
 	"testing"
+
+	"github.com/gorilla/mux"
 )
 
-//Testes da aplicação
+//Servidores_Terceiro
+func ServCampeonatos() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		dataCamp := []Campeonato{
+			{
+				ID:     30,
+				Titulo: "Brasileirão - Serie A",
+			},
+			{
+				ID:     35,
+				Titulo: "Copa América - Feminina",
+			},
+			{
+				ID:     36,
+				Titulo: "Uruguai - Primeira Divisão",
+			},
+		}
+		w.Header().Set("Content-Type", "application/json")
+		if err := json.NewEncoder(w).Encode(dataCamp); err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("Error reading campeonatos"))
+		}
+	})
+}
 
-//Listar Campeonatos Disponiveis (Sucesso)
-func TestListarCampeonatosDisponiveis(t *testing.T) {
-	resp, err := http.Get("http://localhost:5000/campeonatos")
-	if err != nil {
-		t.Error(err)
-	}
-	defer resp.Body.Close()
+func ServJogos() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		dataJog := []Jogo{
+			// Brasileirão - Serie A
+			{
+				ID:            354858757161272,
+				Titulo:        "São Paulo x Flamengo",
+				ID_Campeonato: 30,
+				Data:          "2022-08-31",
+			},
+			{
+				ID:            354858757161273,
+				Titulo:        "Fluminense x Palmeiras",
+				ID_Campeonato: 30,
+				Data:          "2022-07-18",
+			},
+			{
+				ID:            354858757161274,
+				Titulo:        "Botafogo x Santos",
+				ID_Campeonato: 30,
+				Data:          "2022-07-15",
+			},
+			{
+				ID:            354858757161275,
+				Titulo:        "Vasco x Atlético",
+				ID_Campeonato: 30,
+				Data:          "2022-07-16",
+			},
+			{
+				ID:            354858757161276,
+				Titulo:        "Ceará x Avaí",
+				ID_Campeonato: 30,
+				Data:          "2022-07-22",
+			},
+			// Copa América - Feminina
+			{
+				ID:            354858324654689,
+				Titulo:        "Colômbia x Chile",
+				ID_Campeonato: 35,
+				Data:          "2022-07-22",
+			},
+			{
+				ID:            354858324654690,
+				Titulo:        "Equador x Paraguai",
+				ID_Campeonato: 35,
+				Data:          "2022-07-15",
+			},
+			// Uruguai - Primeira Divisão
+			{
+				ID:            65489162165498,
+				Titulo:        "Liverpool FC x AlbionFC",
+				ID_Campeonato: 36,
+				Data:          "2022-07-15",
+			},
+			{
+				ID:            65489162165499,
+				Titulo:        "Deportivo Maldonado x Torque da Cidade de Montevideu",
+				ID_Campeonato: 36,
+				Data:          "2022-07-18",
+			},
+		}
+		w.Header().Set("Content-Type", "application/json")
+		if err := json.NewEncoder(w).Encode(dataJog); err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("Error reading campeonatos"))
+		}
+	})
+}
 
-	body, err := ioutil.ReadAll(resp.Body)
+//Teste: Listar Campeonatos disponíveis (SUCESSO)
+func Test_ServCampeonatos(t *testing.T) {
+	r := mux.NewRouter()
+	r.Handle("/campeonatos", ServCampeonatos())
+	ts := httptest.NewServer(r)
+	defer ts.Close()
+	res, _ := http.Get(ts.URL + "/campeonatos")
+	body, _ := ioutil.ReadAll(res.Body)
+
+	campeonatos := []byte(`[{"id":30,"titulo": "Brasileirão - Serie A"},{"id":35,"titulo": "Copa América - Feminina"},{"id":36,"titulo": "Uruguai - Primeira Divisão"}]`)
+
+	eq, err := JSONBytesEqual(body, campeonatos)
 	if err != nil {
 		log.Println(err)
-		t.Error(err)
 	}
-	log.Println(string(body))
 
-	if resp.StatusCode != 200 {
-		t.Errorf("Sem sucesso!! %v", string(body))
+	if !eq {
+		t.Errorf("Sem sucesso!! valor recebido: '%s', valor esperado: '%s'", body, campeonatos)
+	}
+
+	if err != nil {
+		t.Errorf("Expected nil, received %s", err.Error())
+	}
+	if res.StatusCode != http.StatusOK {
+		t.Errorf("Expected %d, received %d", http.StatusOK, res.StatusCode)
 	}
 }
 
-//Listar Jogos Disponiveis (Sucesso)
-func TestListarJogosDisponiveis(t *testing.T) {
-	resp, err := http.Get("http://localhost:5000/jogos")
-	if err != nil {
-		t.Error(err)
-	}
-	defer resp.Body.Close()
+//Teste: Listar Jogos disponíveis (SUCESSO)
+func Test_ServJogos(t *testing.T) {
+	r := mux.NewRouter()
+	r.Handle("/jogos", ServCampeonatos())
+	ts := httptest.NewServer(r)
+	defer ts.Close()
+	res, err := http.Get(ts.URL + "/jogos")
 
-	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Println(err)
-		t.Error(err)
+		t.Errorf("Expected nil, received %s", err.Error())
 	}
-	log.Println(string(body))
-
-	if resp.StatusCode != 200 {
-		t.Errorf("Sem sucesso!! %v", string(body))
+	if res.StatusCode != http.StatusOK {
+		t.Errorf("Expected %d, received %d", http.StatusOK, res.StatusCode)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Criar bilhete de aposta (Sucesso)
 func TestCriarVenda(t *testing.T) {
 
@@ -432,4 +534,32 @@ func TestListarUsuarios(t *testing.T) {
 	if resp.StatusCode != 200 {
 		t.Errorf("Sem sucesso!! %v", string(body))
 	}
+}
+
+//Funções para comparar os Json's
+
+// JSONEqual comparando dois Json
+func JSONEqual(a, b io.Reader) (bool, error) {
+	var j, j2 interface{}
+	d := json.NewDecoder(a)
+	if err := d.Decode(&j); err != nil {
+		return false, err
+	}
+	d = json.NewDecoder(b)
+	if err := d.Decode(&j2); err != nil {
+		return false, err
+	}
+	return reflect.DeepEqual(j2, j), nil
+}
+
+// JSONBytesEqual compara o JSON em fatias de dois bytes.
+func JSONBytesEqual(a, b []byte) (bool, error) {
+	var j, j2 interface{}
+	if err := json.Unmarshal(a, &j); err != nil {
+		return false, err
+	}
+	if err := json.Unmarshal(b, &j2); err != nil {
+		return false, err
+	}
+	return reflect.DeepEqual(j2, j), nil
 }
