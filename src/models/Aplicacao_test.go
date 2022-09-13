@@ -47,7 +47,7 @@ func ServJogos() http.Handler {
 				ID:            354858757161272,
 				Titulo:        "São Paulo x Flamengo",
 				ID_Campeonato: 30,
-				Data:          "2022-08-31",
+				Data:          "2023-10-31",
 			},
 			{
 				ID:            354858757161273,
@@ -153,6 +153,7 @@ func Test_ServJogos(t *testing.T) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //Criar bilhete de aposta (Sucesso)
 func TestCriarVenda(t *testing.T) {
 
@@ -160,7 +161,7 @@ func TestCriarVenda(t *testing.T) {
     	"id_jogo": 354858757161272,
   		"titulo_jogo": "São Paulo x Flamengo",
   		"campeonato": "Brasileirão - Serie A",
-  		"data_jogo": "2022-08-31",
+  		"data_jogo": "2022-10-31",
   		"opcao_aposta": "casa",
   		"valor_aposta": 50,
   		"limite_aposta": 200,
@@ -182,7 +183,7 @@ func TestCriarVenda(t *testing.T) {
 		t.Error(err)
 	}
 	log.Println(string(body))
-	pro := Campeonato{}
+	pro := Vendas{}
 	err = json.Unmarshal([]byte(string(body)), &pro)
 	if err != nil {
 		log.Println(err)
@@ -259,7 +260,7 @@ func TestCriarVendaErro_CPF(t *testing.T) {
 			"id_jogo": 354858757161272,
 			"titulo_jogo": "São Paulo x Flamengo",
  			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2022-08-31",
+  			"data_jogo": "2023-10-31",
   			"opcao_aposta": "fora",
 			"valor_aposta": 120,
 			"limite_aposta": 300,
@@ -297,7 +298,7 @@ func TestCriarVendaErro_DataNascimento(t *testing.T) {
 			"id_jogo": 354858757161272,
 			"titulo_jogo": "São Paulo x Flamengo",
  			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2022-08-31",
+  			"data_jogo": "2023-10-31",
   			"opcao_aposta": "empate",
 			"valor_aposta": 120,
 			"limite_aposta": 300,
@@ -334,7 +335,7 @@ func TestCriarVendaErro_LimiteExcedido(t *testing.T) {
 			"id_jogo": 354858757161272,
 			"titulo_jogo": "São Paulo x Flamengo",
  			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2022-08-31",
+  			"data_jogo": "2023-10-31",
   			"opcao_aposta": "empate",
 			"valor_aposta": 500,
 			"limite_aposta": 100,
@@ -372,7 +373,7 @@ func TestCriarVendaErro_NomeCliente(t *testing.T) {
 			"id_jogo": 354858757161272,
 			"titulo_jogo": "São Paulo x Flamengo",
  			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2022-08-31",
+  			"data_jogo": "2023-10-31",
   			"opcao_aposta": "empate",
 			"valor_aposta": 120,
 			"limite_aposta": 300,
@@ -410,7 +411,7 @@ func TestCriarVendaErro_NomeCampeonato(t *testing.T) {
 			"id_jogo": 354858757161272,
 			"titulo_jogo": "São Paulo x Flamengo",
  			"campeonato": "",
-  			"data_jogo": "2022-08-31",
+  			"data_jogo": "2023-10-31",
   			"opcao_aposta": "empate",
 			"valor_aposta": 120,
 			"limite_aposta": 300,
@@ -448,7 +449,7 @@ func TestCriarVendaErro_NomeTitulo(t *testing.T) {
 			"id_jogo": 354858757161272,
 			"titulo_jogo": "",
  			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2022-08-31",
+  			"data_jogo": "2023-10-31",
   			"opcao_aposta": "empate",
 			"valor_aposta": 120,
 			"limite_aposta": 300,
@@ -486,7 +487,7 @@ func TestCriarVendaErro_IDjogo(t *testing.T) {
 			"id_jogo": 0,
 			"titulo_jogo": "São Paulo x Flamengo",
  			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2022-08-31",
+  			"data_jogo": "2023-10-31",
   			"opcao_aposta": "empate",
 			"valor_aposta": 120,
 			"limite_aposta": 300,

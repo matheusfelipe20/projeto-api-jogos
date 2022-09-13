@@ -14,6 +14,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		Titulo:        "São Paulo x Flamengo",
 		ID_Campeonato: 30,
 		Data:          "2022-08-31",
+		Opcoes:        mapOpcoes(2.0, 3.5, 1.6),
 	},
 	{
 		ID:            354858757161273,
@@ -72,4 +73,14 @@ func ListarJogos(w http.ResponseWriter, r *http.Request) {
 
 	respostas.JSON(w, http.StatusOK, Jogos)
 
+}
+
+func mapOpcoes(a float64, b float64, c float64) []map[string]float64 {
+	opcoes := []map[string]float64{}
+
+	opcoes = append(opcoes, map[string]float64{"casa": a})
+	opcoes = append(opcoes, map[string]float64{"empate": b})
+	opcoes = append(opcoes, map[string]float64{"fora": c})
+
+	return opcoes
 }

@@ -52,7 +52,8 @@ func RealizarVenda(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respostas.JSON(w, http.StatusCreated, venda)
+	resultadoOK := "Venda realizada com sucesso!"
+	respostas.JSON(w, http.StatusCreated, resultadoOK)
 }
 
 // ListarVendas irá buscar todas as vendas no banco de dados

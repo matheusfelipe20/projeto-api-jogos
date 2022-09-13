@@ -14,7 +14,7 @@ type Vendas struct {
 	Data_jogo          string  `json:"data_jogo,omitempty"`
 	Opcao_aposta       string  `json:"opcao_aposta,omitempty"`
 	Valor_aposta       float64 `json:"valor_aposta,omitempty"`
-	Limite_aposta      float64 `json:"limite_aposta,omitempty"` //validar limite de aposta
+	Limite_aposta      float64 `json:"limite_aposta,omitempty"`
 	Cliente_nome       string  `json:"cliente_nome,omitempty"`
 	Cliente_cpf        string  `json:"cliente_cpf,omitempty"`
 	Cliente_nascimento string  `json:"cliente_nascimento,omitempty"`
