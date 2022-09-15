@@ -15,6 +15,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 30,
 		Data:          "2022-08-31",
 		Opcoes:        mapOpcoes(2.0, 3.5, 1.6),
+		Limite:        mapLimite(900.0, 400.0, 350.0),
 	},
 	{
 		ID:            354858757161273,
@@ -22,6 +23,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 30,
 		Data:          "2022-07-18",
 		Opcoes:        mapOpcoes(3.6, 5.5, 2.6),
+		Limite:        mapLimite(500.0, 700.0, 550.0),
 	},
 	{
 		ID:            354858757161274,
@@ -29,6 +31,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 30,
 		Data:          "2022-07-15",
 		Opcoes:        mapOpcoes(2.0, 4.0, 3.6),
+		Limite:        mapLimite(800.0, 200.0, 550.0),
 	},
 	{
 		ID:            354858757161275,
@@ -36,6 +39,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 30,
 		Data:          "2022-07-16",
 		Opcoes:        mapOpcoes(3.2, 2.5, 1.6),
+		Limite:        mapLimite(950.0, 800.0, 750.0),
 	},
 	{
 		ID:            354858757161276,
@@ -43,6 +47,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 30,
 		Data:          "2022-07-22",
 		Opcoes:        mapOpcoes(1.8, 2.5, 1.6),
+		Limite:        mapLimite(750.0, 300.0, 550.0),
 	},
 	// Copa América - Feminina
 	{
@@ -51,6 +56,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 35,
 		Data:          "2022-07-22",
 		Opcoes:        mapOpcoes(2.3, 5.5, 3.6),
+		Limite:        mapLimite(880.0, 330.0, 400.0),
 	},
 	{
 		ID:            354858324654690,
@@ -58,6 +64,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 35,
 		Data:          "2022-07-15",
 		Opcoes:        mapOpcoes(2.6, 3.1, 4.2),
+		Limite:        mapLimite(300.0, 200.0, 150.0),
 	},
 	// Uruguai - Primeira Divisão
 	{
@@ -66,6 +73,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 36,
 		Data:          "2022-07-15",
 		Opcoes:        mapOpcoes(2.7, 3.0, 4.6),
+		Limite:        mapLimite(970.0, 400.0, 950.0),
 	},
 	{
 		ID:            65489162165499,
@@ -73,6 +81,7 @@ var Jogos []models.Jogo = []models.Jogo{
 		ID_Campeonato: 36,
 		Data:          "2022-07-18",
 		Opcoes:        mapOpcoes(2.0, 3.5, 1.6),
+		Limite:        mapLimite(700.0, 500.0, 450.0),
 	},
 }
 
@@ -91,4 +100,14 @@ func mapOpcoes(a float64, b float64, c float64) []map[string]float64 {
 	opcoes = append(opcoes, map[string]float64{"fora": c})
 
 	return opcoes
+}
+
+func mapLimite(a float64, b float64, c float64) []map[string]float64 {
+	limite := []map[string]float64{}
+
+	limite = append(limite, map[string]float64{"casa": a})
+	limite = append(limite, map[string]float64{"empate": b})
+	limite = append(limite, map[string]float64{"fora": c})
+
+	return limite
 }
