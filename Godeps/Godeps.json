@@ -1,6 +1,6 @@
 {
     "ImportPath": "api-jogos-deploy",
-    "GoVersion": "1.18.1",
+    "GoVersion": "1.18.6",
     "GodepVersion": "v74",
     "Packages": [
         "./..."
