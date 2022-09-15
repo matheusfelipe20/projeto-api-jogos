@@ -1,21 +1,21 @@
 package configs
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strconv"
-	"fmt"
 
 	"github.com/joho/godotenv"
 )
 
-var(
+var (
 	StringConexaoBanco = ""
-	Porta = 0
+	Porta              = 0
 )
 
 // Carregar inicializa as variáveis de ambiente
-func Carregar(){
+func Carregar() {
 	var err error
 
 	if err = godotenv.Load(); err != nil {
