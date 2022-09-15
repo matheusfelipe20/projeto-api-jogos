@@ -36,6 +36,7 @@ func ServCampeonatos() http.Handler {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte("Error reading campeonatos"))
 		}
+
 	})
 }
 
@@ -117,15 +118,15 @@ func Test_ServCampeonatos(t *testing.T) {
 	res, _ := http.Get(ts.URL + "/campeonatos")
 	body, _ := ioutil.ReadAll(res.Body)
 
-	campeonatos := []byte(`[{"id":30,"titulo": "Brasileirão - Serie A"},{"id":35,"titulo": "Copa América - Feminina"},{"id":36,"titulo": "Uruguai - Primeira Divisão"}]`)
+	campeonatosCadastrado := []byte(`[{"id":30,"titulo": "Brasileirão - Serie A"},{"id":35,"titulo": "Copa América - Feminina"},{"id":36,"titulo": "Uruguai - Primeira Divisão"}]`)
 
-	eq, err := JSONBytesEqual(body, campeonatos)
+	eq, err := JSONBytesEqual(body, campeonatosCadastrado)
 	if err != nil {
 		log.Println(err)
 	}
 
 	if !eq {
-		t.Errorf("Sem sucesso!! valor recebido: '%s', valor esperado: '%s'", body, campeonatos)
+		t.Errorf("Sem sucesso!! valor recebido: '%s', valor esperado: '%s'", body, campeonatosCadastrado)
 	}
 
 	if err != nil {
@@ -152,9 +153,77 @@ func Test_ServJogos(t *testing.T) {
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Listar Vendas realizadas (Sucesso)
+func Test_ListarVendas(t *testing.T) {
+	resp, err := http.Get("http://localhost:5000/venda")
+	if err != nil {
+		t.Error(err)
+	}
+	defer resp.Body.Close()
 
-//Criar bilhete de aposta (Sucesso)
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		t.Error(err)
+	}
+	log.Println(string(body))
+
+	if resp.StatusCode != 200 {
+		t.Errorf("Sem sucesso!! %v", string(body))
+	}
+}
+
+//TESTE CADASTRO DE BILHETE TIPO 1: Sucesso
+func Test_CadastrarVendas(t *testing.T) {
+
+	u := "http://localhost:5000/venda"
+
+	bilhete := []byte(`{
+    	"id_jogo": 354858757161272,
+  		"titulo_jogo": "São Paulo x Flamengo",
+  		"campeonato": "Brasileirão - Serie A",
+  		"data_jogo": "2022-10-31",
+  		"opcao_aposta": "casa",
+  		"valor_aposta": 50,
+  		"limite_aposta": 200,
+  		"cliente_nome": "Bello Moreira Alcântara",
+  		"cliente_cpf": "659.102.554-52",
+  		"cliente_nascimento": "01/01/2000"
+    }`)
+
+	b := bytes.NewBufferString(string(bilhete))
+
+	req, err := http.NewRequest("POST", u, b)
+	req.Header.Set("Content-Type", "application/json")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	c := http.DefaultClient
+	resp, err := c.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(string(body))
+	pro := Vendas{}
+	err = json.Unmarshal([]byte(string(body)), &pro)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if resp.StatusCode != http.StatusCreated {
+		t.Errorf("Sem sucesso!! %v", string(body))
+	}
+}
+
+//TESTE CADASTRO DE BILHETE TIPO 2: Sucesso
 func TestCriarVenda(t *testing.T) {
 
 	bilhete := []byte(`{
@@ -168,7 +237,7 @@ func TestCriarVenda(t *testing.T) {
   		"cliente_nome": "Bello Moreira Alcântara",
   		"cliente_cpf": "659.102.554-52",
   		"cliente_nascimento": "01/01/2000"
-    	}`)
+    }`)
 
 	resp, err := http.Post("http://localhost:5000/venda", "application/json",
 		bytes.NewBuffer(bilhete))
@@ -190,26 +259,6 @@ func TestCriarVenda(t *testing.T) {
 	}
 
 	if resp.StatusCode != http.StatusCreated {
-		t.Errorf("Sem sucesso!! %v", string(body))
-	}
-}
-
-//Listar Vendas realizadas (Sucesso)
-func TestListarVendas(t *testing.T) {
-	resp, err := http.Get("http://localhost:5000/venda")
-	if err != nil {
-		t.Error(err)
-	}
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Println(err)
-		t.Error(err)
-	}
-	log.Println(string(body))
-
-	if resp.StatusCode != 200 {
 		t.Errorf("Sem sucesso!! %v", string(body))
 	}
 }
