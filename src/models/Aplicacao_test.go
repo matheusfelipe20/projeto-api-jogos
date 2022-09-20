@@ -179,13 +179,12 @@ func Test_CadastrarVendas(t *testing.T) {
 	u := "http://localhost:5000/venda"
 
 	bilhete := []byte(`{
-    	"id_jogo": 354858757161272,
+  		"id_jogo": 354858757161272,
   		"titulo_jogo": "São Paulo x Flamengo",
   		"campeonato": "Brasileirão - Serie A",
-  		"data_jogo": "2022-10-31",
+  		"data_jogo": "2022-09-30",
   		"opcao_aposta": "casa",
-  		"valor_aposta": 50,
-  		"limite_aposta": 200,
+  		"valor_aposta": 150,
   		"cliente_nome": "Bello Moreira Alcântara",
   		"cliente_cpf": "659.102.554-52",
   		"cliente_nascimento": "01/01/2000"
@@ -227,13 +226,12 @@ func Test_CadastrarVendas(t *testing.T) {
 func TestCriarVenda(t *testing.T) {
 
 	bilhete := []byte(`{
-    	"id_jogo": 354858757161272,
+  		"id_jogo": 354858757161272,
   		"titulo_jogo": "São Paulo x Flamengo",
   		"campeonato": "Brasileirão - Serie A",
-  		"data_jogo": "2022-10-31",
+  		"data_jogo": "2022-09-30",
   		"opcao_aposta": "casa",
-  		"valor_aposta": 50,
-  		"limite_aposta": 200,
+  		"valor_aposta": 150,
   		"cliente_nome": "Bello Moreira Alcântara",
   		"cliente_cpf": "659.102.554-52",
   		"cliente_nascimento": "01/01/2000"
@@ -268,16 +266,15 @@ func TestCriarVendaErro_Data(t *testing.T) {
 
 	resp, err := http.Post("http://localhost:5000/venda", "application/json",
 		bytes.NewBuffer([]byte(`{
-			"id_jogo": 354858757161273,
-  			"titulo_jogo": "Fluminense x Palmeiras",
+			"id_jogo": 354858757161272,
+  			"titulo_jogo": "São Paulo x Flamengo",
   			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2022-07-18",
-  			"opcao_aposta": "fora",
-  			"valor_aposta": 130,
-  			"limite_aposta": 300,
-  			"cliente_nome": "José",
-  			"cliente_cpf": "231.300.114-80",
-  			"cliente_nascimento": "02/06/1992"
+  			"data_jogo": "2022-08-30",
+  			"opcao_aposta": "casa",
+  			"valor_aposta": 150,
+  			"cliente_nome": "Bello Moreira Alcântara",
+  			"cliente_cpf": "659.102.554-52",
+  			"cliente_nascimento": "01/01/2000"
     		}`)))
 	if err != nil {
 		t.Error(err)
@@ -307,15 +304,14 @@ func TestCriarVendaErro_CPF(t *testing.T) {
 	resp, err := http.Post("http://localhost:5000/venda", "application/json",
 		bytes.NewBuffer([]byte(`{
 			"id_jogo": 354858757161272,
-			"titulo_jogo": "São Paulo x Flamengo",
- 			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2023-10-31",
-  			"opcao_aposta": "fora",
-			"valor_aposta": 120,
-			"limite_aposta": 300,
-			"cliente_nome": "Valdir",
-			"cliente_cpf": "502.098.729-08",
-			"cliente_nascimento": "10/04/2000"
+  			"titulo_jogo": "São Paulo x Flamengo",
+  			"campeonato": "Brasileirão - Serie A",
+  			"data_jogo": "2022-09-30",
+  			"opcao_aposta": "casa",
+  			"valor_aposta": 150,
+  			"cliente_nome": "Bello Moreira Alcântara",
+  			"cliente_cpf": "709.102.554-82",
+  			"cliente_nascimento": "01/01/2000"
     	}`)))
 	if err != nil {
 		t.Error(err)
@@ -345,15 +341,14 @@ func TestCriarVendaErro_DataNascimento(t *testing.T) {
 	resp, err := http.Post("http://localhost:5000/venda", "application/json",
 		bytes.NewBuffer([]byte(`{
 			"id_jogo": 354858757161272,
-			"titulo_jogo": "São Paulo x Flamengo",
- 			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2023-10-31",
-  			"opcao_aposta": "empate",
-			"valor_aposta": 120,
-			"limite_aposta": 300,
-			"cliente_nome": "Valdir",
-			"cliente_cpf": "231.300.114-80",
-			"cliente_nascimento": "30/08/2006"
+  			"titulo_jogo": "São Paulo x Flamengo",
+  			"campeonato": "Brasileirão - Serie A",
+  			"data_jogo": "2022-09-30",
+  			"opcao_aposta": "casa",
+  			"valor_aposta": 150,
+  			"cliente_nome": "Bello Moreira Alcântara",
+  			"cliente_cpf": "659.102.554-52",
+  			"cliente_nascimento": "01/01/2008"
     	}`)))
 	if err != nil {
 		t.Error(err)
@@ -382,15 +377,14 @@ func TestCriarVendaErro_LimiteExcedido(t *testing.T) {
 	resp, err := http.Post("http://localhost:5000/venda", "application/json",
 		bytes.NewBuffer([]byte(`{
 			"id_jogo": 354858757161272,
-			"titulo_jogo": "São Paulo x Flamengo",
- 			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2023-10-31",
-  			"opcao_aposta": "empate",
-			"valor_aposta": 500,
-			"limite_aposta": 100,
-			"cliente_nome": "Valdir",
-			"cliente_cpf": "231.300.114-80",
-			"cliente_nascimento": "15/02/2000"
+  			"titulo_jogo": "São Paulo x Flamengo",
+  			"campeonato": "Brasileirão - Serie A",
+  			"data_jogo": "2022-09-30",
+  			"opcao_aposta": "casa",
+  			"valor_aposta": 550,
+  			"cliente_nome": "Bello Moreira Alcântara",
+  			"cliente_cpf": "659.102.554-52",
+  			"cliente_nascimento": "01/01/2000"
     	}`)))
 	if err != nil {
 		t.Error(err)
@@ -420,15 +414,14 @@ func TestCriarVendaErro_NomeCliente(t *testing.T) {
 	resp, err := http.Post("http://localhost:5000/venda", "application/json",
 		bytes.NewBuffer([]byte(`{
 			"id_jogo": 354858757161272,
-			"titulo_jogo": "São Paulo x Flamengo",
- 			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2023-10-31",
-  			"opcao_aposta": "empate",
-			"valor_aposta": 120,
-			"limite_aposta": 300,
-			"cliente_nome": "",
-			"cliente_cpf": "231.300.114-80",
-			"cliente_nascimento": "30/08/2001"
+  			"titulo_jogo": "São Paulo x Flamengo",
+  			"campeonato": "Brasileirão - Serie A",
+  			"data_jogo": "2022-09-30",
+  			"opcao_aposta": "casa",
+  			"valor_aposta": 150,
+  			"cliente_nome": "",
+  			"cliente_cpf": "659.102.554-52",
+  			"cliente_nascimento": "01/01/2000"
     	}`)))
 	if err != nil {
 		t.Error(err)
@@ -458,15 +451,14 @@ func TestCriarVendaErro_NomeCampeonato(t *testing.T) {
 	resp, err := http.Post("http://localhost:5000/venda", "application/json",
 		bytes.NewBuffer([]byte(`{
 			"id_jogo": 354858757161272,
-			"titulo_jogo": "São Paulo x Flamengo",
- 			"campeonato": "",
-  			"data_jogo": "2023-10-31",
-  			"opcao_aposta": "empate",
-			"valor_aposta": 120,
-			"limite_aposta": 300,
-			"cliente_nome": "Roberto",
-			"cliente_cpf": "231.300.114-80",
-			"cliente_nascimento": "30/08/2001"
+  			"titulo_jogo": "São Paulo x Flamengo",
+  			"campeonato": "",
+  			"data_jogo": "2022-09-30",
+  			"opcao_aposta": "casa",
+  			"valor_aposta": 150,
+  			"cliente_nome": "Bello Moreira Alcântara",
+  			"cliente_cpf": "659.102.554-52",
+  			"cliente_nascimento": "01/01/2000"
     	}`)))
 	if err != nil {
 		t.Error(err)
@@ -496,15 +488,14 @@ func TestCriarVendaErro_NomeTitulo(t *testing.T) {
 	resp, err := http.Post("http://localhost:5000/venda", "application/json",
 		bytes.NewBuffer([]byte(`{
 			"id_jogo": 354858757161272,
-			"titulo_jogo": "",
- 			"campeonato": "Brasileirão - Serie A",
-  			"data_jogo": "2023-10-31",
-  			"opcao_aposta": "empate",
-			"valor_aposta": 120,
-			"limite_aposta": 300,
-			"cliente_nome": "Gabrielly",
-			"cliente_cpf": "231.300.114-80",
-			"cliente_nascimento": "30/08/2001"
+  			"titulo_jogo": "",
+  			"campeonato": "Brasileirão - Serie A",
+  			"data_jogo": "2022-09-30",
+  			"opcao_aposta": "casa",
+  			"valor_aposta": 150,
+  			"cliente_nome": "Bello Moreira Alcântara",
+  			"cliente_cpf": "659.102.554-52",
+  			"cliente_nascimento": "01/01/2000"
     	}`)))
 	if err != nil {
 		t.Error(err)
@@ -566,9 +557,9 @@ func TestCriarVendaErro_IDjogo(t *testing.T) {
 	}
 }
 
-//Listar Usuario por CPF(Sucesso)
+//Listar Usuarios com CPF cadastrado(Sucesso)
 func TestListarUsuarios(t *testing.T) {
-	resp, err := http.Get("http://localhost:5000/usuarios/84280875472")
+	resp, err := http.Get("http://localhost:5000/usuarios/cpf")
 	if err != nil {
 		t.Error(err)
 	}
