@@ -31,6 +31,7 @@ func RealizarVenda(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// adicionando as operações de apostas
+	listaCampeonatos := Campeonatos
 	listaJogos := Jogos
 	for _, jogo := range listaJogos {
 		if jogo.ID == venda.Id_jogo {
@@ -42,6 +43,24 @@ func RealizarVenda(w http.ResponseWriter, r *http.Request) {
 
 			ganho := services.CalcularGanho(venda.Valor_aposta, venda.Opcao_valor)
 			venda.Ganho_provavel = ganho	// atribuição do ganho provável a venda
+
+			venda.Titulo_jogo = jogo.Titulo	// atribuição do título do jogo a venda
+			venda.Data_jogo = jogo.Data	// atribuição da data do jogo a venda
+
+			for _, campeonato := range listaCampeonatos {
+				if campeonato.ID == jogo.ID_Campeonato {
+					venda.Campeonato = campeonato.Titulo	// atribuição do título do campeonato a venda
+				}
+			}
+			break
+		}
+	}
+
+	listaUsuarios := Usuario
+	for _, usuario := range listaUsuarios {
+		if usuario.Cpf == venda.Cliente_cpf{
+			venda.Cliente_nome = usuario.Nome	// atribuição do nome do usuário a venda
+			venda.Cliente_nascimento = usuario.Nascimento	// atribuição da data de nascimento do usuário a venda
 			break
 		}
 	}
